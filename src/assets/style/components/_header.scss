@@ -1,0 +1,14 @@
+
+.header {
+  $main-height: 496px;
+  position: relative;
+  .header-main-image {
+    height: $main-height;
+  }
+  .header-image-context {
+    position: absolute;
+    right: 40px;
+    top: 40px;
+  }
+  
+}

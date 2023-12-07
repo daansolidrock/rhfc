@@ -1,0 +1,26 @@
+.item-card {
+
+    .item-image {
+        height: 315px;
+        background-size: cover;
+        background-position: center center;
+    }
+
+    // level 3
+    .item-tag {
+        position: absolute;
+        left: 20px;
+        top: 0;
+        background-color: $primary;
+        writing-mode: vertical-lr;
+        padding: 15px 10px;
+        color: white;
+        letter-spacing: 5px;
+    }
+
+    .item-stared-icon {
+        position: absolute;
+        top: 20px;
+        right: 22px;
+    }
+}

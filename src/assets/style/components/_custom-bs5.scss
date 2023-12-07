@@ -1,0 +1,11 @@
+.btn-primary-lighter {
+    color: #212529;
+    background-color: #EAF0ED;
+    border-color: #EAF0ED;
+
+    &:hover{
+        color: #212529;
+        background-color: #d4e0da;
+        border-color: #ccdbd4;
+    }
+}

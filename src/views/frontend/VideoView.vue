@@ -68,8 +68,8 @@
 					</div>
 	
 					<div class="row g-0 mb-3 video-list" v-for="video in video_list">
-						<div class="col-md-3">
-							<img :src="video.thumbnail_url" class="img-fluid p-3" :alt="video.title">
+						<div class="col-md-3" @click="reDirectUrl(video.video_url)">
+							<img :src="video.thumbnail_url" class="img-fluid p-3" :alt="video.title" style="cursor: pointer;">
 						</div>
 						<div class="col-md-9">
 							<div class="card-body d-flex flex-column justify-content-between h-100 p-3 ">
@@ -81,7 +81,7 @@
 									<p class="card-text mb-0">
 										<small class="text-muted">{{ video.publish_date }}</small>
 									</p>
-									<!-- <a href="" class="btn btn-primary stretched-link">查看細節</a> -->
+									<button class="btn btn-warning" @click="reDirectUrl(video.video_url)">點我觀看</button>
 								</div>
 							</div>
 						</div>
@@ -95,15 +95,16 @@
 <script setup>
 import { ref, onMounted } from 'vue'
 import ImageSectionVue from '@/components/Frontend/Layout/ImageSection.vue';
-import axios from "@/utils/https.js";
+import { apiGetVideoTypeList, apiGetVideoByType, apiGetVideoNewest } from "@/utils/api.js";
 
 const activeName = ref('1')
 
 const categories = ref([])
 const getTypeList = async() => {
-	const data = await axios.get(`http://localhost/video/videotype`)
-	console.log(data.data[0])
-	categories.value = data.data
+	// const data = await axios.get(`http://localhost/video/videotype`)
+	const { data } = await apiGetVideoTypeList();
+	// console.log(data)
+	categories.value = data
 }
 
 
@@ -113,8 +114,10 @@ const video_list = ref([])
 const getVideoList = async(selected) => {
 	loading.value = true
 
-	const data = await axios.get(`http://localhost/video/list/?type_name=${selected}`)
-	video_list.value = data.data[0].sub_link_url
+	// const data = await axios.get(`http://localhost/video/list/?type_name=${selected}`)
+	const { data } = await apiGetVideoByType(selected)
+ 	// video_list.value = data.data[0].sub_link_url
+	video_list.value = data[0].sub_link_url
 	isSelected.value = selected
 	
 	loading.value = false
@@ -132,10 +135,17 @@ const getId = (url) => {
 
 const getNewestVideo = async() => {
 	loading.value = true
-	const data = await axios.get(`http://localhost/video/newest`)
-	const videoId = getId(data.data.sub_link_url[0].video_url)
+	// const data = await axios.get(`http://localhost/video/newest`)
+	const { data } = await apiGetVideoNewest()
+	console.log(data)
+	const videoId = getId(data.sub_link_url[0].video_url)
 	newestUrl.value = `//www.youtube.com/embed/${videoId}`
 	loading.value = false
+}
+
+const reDirectUrl = (url) => {
+	console.log(url)
+	window.location.href = url;
 }
 
 onMounted(() => {
@@ -190,6 +200,10 @@ onMounted(() => {
 	}
 
 	:hover{
+		color: #e89b02;
+	}
+
+	.category-active{
 		color: #e89b02;
 	}
 }

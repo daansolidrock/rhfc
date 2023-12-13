@@ -59,7 +59,6 @@
 		@closeModal="show = false"
 		@handleUpdateList="handleUpdateList"
 		:option="option"
-		:editData="editData"
 	/>
 
 </template>
@@ -71,33 +70,25 @@ import DialogModal from '@/components/Admin/Video/DialogModal.vue'
 const tableData = ref();
 const editData = ref();
 
-// const handleCurrentChange = () => handleUpdateList()
+const handleCurrentChange = () => getVideoList()
 
-const handleUpdateList = async() => {
+const getVideoList = async() => {
 	const { data } = await apiGetAdminVideList()
 	tableData.value = data
 }
 
 const handleCreate = () => {
 	show.value = true;
-	option.value = 'create'
-	editData.value = {
-		"select": "",
-		"url": ""
-	}
+	option.value = 'edit'
+	editData.value = ''
 }
 
 const show = ref(false);
 const option = ref('')
 const handleEdit = (row) => {
+	// console.log(row)
 	show.value = true;
 	option.value = 'edit'
-
-	if (row.belong_to == null){ //配合el-cascader
-		row.select = [row.video_type_id]
-	} else {
-		row.select = [row.belong_to, row.video_type_id]
-	}
   editData.value = row;
 }
 
@@ -127,7 +118,7 @@ const handleRemove = () => {
 }
 
 onMounted(() => {
-	handleUpdateList();
+	getVideoList();
 	
 })
 

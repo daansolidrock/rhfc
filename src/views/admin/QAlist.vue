@@ -68,20 +68,18 @@
 		
   </el-card>
 
-	<DialogModal
+	<!-- <DialogModal
 		:show="show"
     @closeModal="show = false"
     @getDonateList="getDonateList"
     :editData="editData"
     :option="option"
-	/>
+	/> -->
 
 </template>
 <script setup>
 import { reactive, ref, onMounted } from 'vue'
-import axios from "@/utils/https.js";
-import { apiGetQuestion } from '@/utils/api.js'
-import DialogModal from "@/components/Admin/Question/DialogModal.vue"
+import { apiGetQuestion, apiCheckToken } from '@/utils/api.js'
 
 const show = ref(false)
 const option = ref();
@@ -113,6 +111,7 @@ const handleEdit = (row) => {
 
 onMounted(() => {
 	getDonateList()
+	
 })
 
 

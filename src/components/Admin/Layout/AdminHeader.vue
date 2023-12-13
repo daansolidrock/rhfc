@@ -13,16 +13,28 @@
     </el-menu-item>
 
     <div class="flex-grow"/>
+    
     <el-sub-menu index="2">
-      <template #title>管理員</template>
-      <el-menu-item index="2-1">登出</el-menu-item>
+      <template #title>
+        {{ authStore.state.userInfo.username }}
+      </template>
+      <el-menu-item index="2-1" @click="logout">登出</el-menu-item>
     </el-sub-menu>
   </el-menu>
 </template>
 
 <script setup>
 import { useCollapseStore } from '@/stores/collapse.js';
-const store = useCollapseStore();
+import { useAuthStore } from "@/stores/auth.js";
+import router from '@/router';
+const store = useCollapseStore()
+const authStore = useAuthStore();
+
+const logout = () => {
+  localStorage.removeItem("auth");
+	authStore.setUserInfo('')
+  router.push("/login");
+};
 </script>
 
 <style lang="scss" scoped>

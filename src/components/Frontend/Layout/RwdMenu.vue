@@ -14,9 +14,9 @@
             <li>
                 <router-link to="/video" class="nav-link">影片專區</router-link>
             </li>
-            <li>
+            <!-- <li>
                 <router-link to="/resource" class="nav-link">資源下載</router-link>
-            </li>
+            </li> -->
             <li>
                 <router-link to="/donate" class="nav-link">奉獻</router-link>
             </li>

@@ -46,7 +46,7 @@
 <script setup>
 import { ref, onMounted } from 'vue'
 import DialogModal from '@/components/Admin/VideoType/DialogModal.vue'
-import { apiGetAdminVideoTypeList } from '@/utils/api.js'
+import { apiGetFileTypeList, apiCheckToken } from '@/utils/api.js'
 
 const show = ref(false)
 const editData = ref()
@@ -54,7 +54,7 @@ const option = ref();
 
 const dataSource = ref()
 const handleUpdateList = async() => {
-	const { data } = await apiGetAdminVideoTypeList()
+	const { data } = await apiGetFileTypeList()
 	dataSource.value = data
 }
 
@@ -86,7 +86,7 @@ const handleEdit = (data) => {
 
 onMounted(() => {
   handleUpdateList();
- 
+  
 })
 
 </script>

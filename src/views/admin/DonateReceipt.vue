@@ -80,25 +80,25 @@
 		
   </el-card>
 
-	<DialogModal
+	<!-- <DialogModal
 		:show="show"
     @closeModal="show = false"
     @getDonateList="getDonateList"
     :editData="editData"
     :option="option"
-	/>
+	/> -->
 
 </template>
 <script setup>
 import { reactive, ref, onMounted } from 'vue'
-import axios from "@/utils/https.js";
-import DialogModal from "@/components/Admin/Donation/DialogModal.vue"
+import { apiGetDonate } from '@/utils/api.js'
+// import DialogModal from "@/components/Admin/Donation/DialogModal.vue"
 
 const show = ref(false)
 const option = ref();
 const tableData = ref([])	
 const getDonateList = async() => {
-	const { data } = await axios.get(`http://localhost/donates`)
+	const { data } = await apiGetDonate()
 	tableData.value = data
 }
 

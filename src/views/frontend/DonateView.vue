@@ -37,19 +37,28 @@
 		</div>
 	</div>
 
-	<DonateModalVue ref="donateModalEl" />
+	<!-- <DonateModalVue ref="donateModalEl" /> -->
+
+	<DonateModalVue 
+		:show="show"
+		@closeModal="show = false"
+	/>
 </template>
 <script setup>
 import { ref } from 'vue'
 import DonateModalVue from '@/components/Frontend/Modal/DonateModal.vue';
 import ImageSectionVue from '@/components/Frontend/Layout/ImageSection.vue';
 
-const donateModalEl = ref(null);
+// const donateModalEl = ref(null);
 
+// const openDonateModal = () => {
+// 	donateModalEl.value.open();
+// }
+
+const show = ref(false)
 const openDonateModal = () => {
-	donateModalEl.value.open();
+	show.value = true
 }
-
 
 </script>
 <style lang="scss" scoped>

@@ -50,20 +50,25 @@
       </router-link>
     </el-sub-menu>
 
-		<el-sub-menu index="2">
+		<!-- <el-sub-menu index="2">
       <template #title>
         <el-icon><i class="fa-solid fa-file"></i></el-icon>
         <span>資源管理</span>
       </template>
-			<el-menu-item index="2-1">
-				<el-icon><i class="fa-solid fa-bookmark"></i></el-icon>
-				<template #title>分類</template>
-			</el-menu-item>
-			<el-menu-item index="2-2">
-				<el-icon><i class="fa-solid fa-list"></i></el-icon>
-				<template #title>列表</template>
-			</el-menu-item>
-    </el-sub-menu>
+
+      <router-link to="/admin/filetype">
+        <el-menu-item index="2-1">
+          <el-icon><i class="fa-solid fa-bookmark"></i></el-icon>
+          <template #title>分類</template>
+        </el-menu-item>
+      </router-link>
+      <router-link to="/admin/file">
+        <el-menu-item index="2-2">
+          <el-icon><i class="fa-solid fa-list"></i></el-icon>
+          <template #title>列表</template>
+        </el-menu-item>
+      </router-link>
+    </el-sub-menu> -->
 
     <router-link to="/admin/receipt">
       <el-menu-item index="3">

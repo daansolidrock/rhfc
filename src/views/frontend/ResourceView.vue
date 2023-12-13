@@ -76,26 +76,26 @@ import ImageSectionVue from '@/components/Frontend/Layout/ImageSection.vue';
 </script>
 <style lang="scss" scoped>
 .left-border {
-    border-left: 10px solid rgb(255, 149, 0);
+	border-left: 10px solid rgb(255, 149, 0);
 }
 
 
 .episode-nav li {
-    padding-left: 13px;
+	padding-left: 13px;
 
-    .category-button {
-        text-decoration: none;
-        font-size: 1.25rem;
-        color: black;
-        font-weight: bolder;
-    }
+	.category-button {
+		text-decoration: none;
+		font-size: 1.25rem;
+		color: black;
+		font-weight: bolder;
+	}
 
-    .category-active {
-        color: #e89b02;
-    }
+	.category-active {
+		color: #e89b02;
+	}
 
-    :hover {
-        color: #e89b02;
-    }
+	:hover {
+		color: #e89b02;
+	}
 }
 </style>

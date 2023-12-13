@@ -1,8 +1,9 @@
 <template lang="">
 	<el-dialog
     v-model="props.show"
-    :title="props.option == 'main' ? '新增主分類' : '新增子分類'"
+    :title="props.option == 'edit' ? '編輯分類' : '新增分類'"
     :before-close="handleClose"
+    width="350px"
   >
     <el-form 
       :model="formData" 
@@ -12,8 +13,16 @@
       ref="formEl"
     >
 
-      <el-form-item label="分類名稱" prop="label">
-        <el-input v-model="formData.label" />
+      <el-form-item label="分類" prop="select">
+        <el-cascader
+          v-model="formData.select"
+          :options="videoTypeOption"
+          :props="props"
+        />
+      </el-form-item>
+
+      <el-form-item label="清單連結" prop="url">
+        <el-input v-model="formData.url"/>
       </el-form-item>
 
     </el-form>
@@ -31,32 +40,34 @@
 
 <script setup>
 import { ref, watch } from 'vue'
-import { apiCreateVideoType, apiUpdateVideoType } from '@/utils/api.js'
+import { apiGetVideoTypeList, apiUpdateVideo, apiCreateVideo } from '@/utils/api.js'
 
 const labelPosition = ref('top')
 const formData = ref()
 const formEl = ref(null)
 const formRules = {
-  label: [{ required: true, message: "分類名稱不能為空", trigger: "blur" }],
+  select: [{ required: true, message: "分類不能為空", trigger: "change" }],
+  url: [{ required: true, message: "清單連結不能為空", trigger: "blur" }],
 };
 
 /* eslint-disable */
 const handleSubmit = () => {
   if (!formEl.value) return;
   formEl.value.validate(async (valid) => {
-    console.log(props.option)
-    console.log(formData.value)
     if (valid) {
+      formData.value.link_url = formData.value.url
+      if (formData.value.select.length == 1){
+        formData.value.type_id = formData.value.select[0]
+      } else{
+        formData.value.type_id = formData.value.select[1]
+      }
+
       if (props.option == 'edit') {
-        await apiUpdateVideoType(props.editData.id, formData.value)
+        await apiUpdateVideo(props.editData.id, formData.value)
         ElMessage.success("更新成功");
-      } else if (props.option == 'sub') {
-        formData.value.belong_to = props.editData.belong_to
-        await apiCreateVideoType(formData.value)
-        ElMessage.success("新增子分類成功");
       } else {
-        await apiCreateVideoType(formData.value)
-        ElMessage.success("新增主分類成功");
+        await apiCreateVideo(formData.value)
+        ElMessage.success("新增成功");
       }
       emits("handleUpdateList");
       emits("closeModal");
@@ -72,6 +83,15 @@ const handleClose = () => {
 };
 
 const emits = defineEmits(["closeModal", "handleUpdateList"]);
+
+
+const videoTypeOption = ref()
+const videoTypeValue = ref()
+const getVideoTypeList = async() => {
+  const { data } = await apiGetVideoTypeList()
+  console.log(data)
+  videoTypeOption.value = data
+}
 
 
 const props = defineProps({
@@ -90,6 +110,7 @@ watch(
   () => props.editData,
   () => {
     formData.value = props.editData;
+    getVideoTypeList()
   }
 );
 

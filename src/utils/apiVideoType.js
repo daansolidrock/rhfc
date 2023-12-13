@@ -1,52 +1,7 @@
-import axios from 'axios'
-import errorHandle from './errorHandle'
+import service from './http'
 
-// Project相關的 api
-const videoTypeRequest = axios.create({
-  baseURL: 'http://localhost/video/'
-})
+export const getVideoTypeList = () => service.get('/videotype')
+export const createVideoType = (data) => service.post('/videotype', data)
+export const updateVideoType = (typeId, data) => service.put(`/videotype/${typeId}`, data)
 
-// Project相關的 api
-export const getVideoTypeList = () => videoTypeRequest.get('/videotype')
-export const createVideoType = (data) => videoTypeRequest.post('/videotype', data)
-export const updateVideoType = (typeId, data) => videoTypeRequest.put(`/videotype/${typeId}`, data)
-
-// 請求攔截
-videoTypeRequest.interceptors.request.use(
-  (config) => {
-    return config
-  },
-  (error) => {
-    return Promise.reject(error)
-  }
-)
-
-// 請求攔截
-videoTypeRequest.interceptors.response.use(
-  (response) => {
-    return response
-  },
-  (error) => {
-    const { response } = error
-    console.log(error)
-    if (response) {
-      // receive the response, but has error
-      errorHandle(response.status, error)
-      return Promise.reject(error)
-    }
-
-    // can not receive response 請求過時或者是斷網
-    if (!window.navigator.onLine) {
-      /* eslint-disable */
-      ElNotification({
-        title: 'Error',
-        message: `receive response 請求過時或者是斷網`,
-        type: 'error',
-        duration: 2500
-      })
-    } else {
-      // maybe Program have some problem
-      return Promise.reject(error)
-    }
-  }
-)
+export const getAdminVideoTypeList = () => service.get('/admin_videotype')

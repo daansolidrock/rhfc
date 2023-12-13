@@ -42,6 +42,7 @@
 	<DonateModalVue 
 		:show="show"
 		@closeModal="show = false"
+		ref="theModal"
 	/>
 </template>
 <script setup>
@@ -56,8 +57,10 @@ import ImageSectionVue from '@/components/Frontend/Layout/ImageSection.vue';
 // }
 
 const show = ref(false)
+const theModal = ref()
 const openDonateModal = () => {
-	show.value = true
+	// show.value = true
+	theModal.value.open()
 }
 
 </script>

@@ -1,52 +1,70 @@
 <template lang="">
-	<el-dialog
-    v-model="props.show"
-    :title="'奉獻收據資料'"
-    :before-close="handleClose"
-  >
-    <el-form 
-      :model="formData" 
-      label-width="120px"
-      label-position="left"
-      :rules="formRules"
-      ref="formEl"
-    >
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" ref="theModal">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title" id="exampleModalLabel">資料填寫</h5>
+						<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+					</div>
+					<div class="modal-body">
+						
+						<el-form 
+							:model="formData" 
+							label-width="120px"
+							label-position="top"
+							:rules="formRules"
+							ref="formEl"
+						>
 
-      <el-form-item label="姓名" prop="name">
-        <el-input  v-model="formData.name"/>
-      </el-form-item>
+							<el-form-item label="姓名" prop="name">
+								<el-input  v-model="formData.name"/>
+							</el-form-item>
 
-			<el-form-item label="電話" prop="phone">
-        <el-input  v-model="formData.phone"/>
-      </el-form-item>
+							<el-form-item label="電話" prop="phone">
+								<el-input  v-model="formData.phone"/>
+							</el-form-item>
 
-			<el-form-item label="郵遞區號" prop="postal_code">
-        <el-input  v-model="formData.postal_code"/>
-      </el-form-item>
+							<el-form-item label="郵遞區號" prop="postal_code">
+								<el-input  v-model="formData.postal_code"/>
+							</el-form-item>
 
-			<el-form-item label="地址" prop="address">
-        <el-input  v-model="formData.address"/>
-      </el-form-item>
+							<el-form-item label="地址" prop="address">
+								<el-input  v-model="formData.address"/>
+							</el-form-item>
 
-			<el-form-item label="備註">
-        <el-input  v-model="formData.note" type="textarea"/>
-      </el-form-item>
+							<el-form-item label="備註">
+								<el-input  v-model="formData.note" type="textarea"/>
+							</el-form-item>
 
-    </el-form>
+						</el-form>
 
-    <template #footer>
-      <span class="dialog-footer">
-        <el-button @click="handleClose">關閉</el-button>
-        <el-button type="primary" @click="handleSubmit()">
-          提交
-        </el-button>
-      </span>
-    </template>
-  </el-dialog>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">關閉</button>
+						<button type="button" class="btn btn-primary" @clikc="handleSubmit()">送出</button>
+					</div>
+				</div>
+			</div>
+		</div>
 </template>
 <script setup>
-import { ref } from 'vue'
-import { apiCreateDonate } from '@/utils/api.js'
+import { ref, onMounted, defineExpose } from 'vue';
+import { Modal } from 'bootstrap';
+
+const theModal = ref("")
+let bsModal = ""
+
+onMounted(() => {
+	bsModal = new Modal(theModal.value);
+})
+
+const open = () => {
+	bsModal.show();
+}
+
+const close = () => {
+	bsModal.hide();
+}
 
 const formEl = ref(null)
 const formData = ref({
@@ -73,23 +91,16 @@ const handleSubmit = () => {
 			await apiCreateDonate(formData.value)
 			ElMessage.success("已傳至管理員");
 
-      emits("closeModal");
+      // emits("closeModal");
+			close()
     } else {
       ElMessage.error("請填寫必要欄位");
     }
   });
 };
 
-const handleClose = () => {
-  emits("closeModal");
-};
-
-const emits = defineEmits(["closeModal"]);
-
-const props = defineProps({
-  show: {
-    type: Boolean,
-  }
+defineExpose({
+	open
 });
 
 </script>

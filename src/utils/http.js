@@ -21,8 +21,6 @@ service.interceptors.request.use(
       config.headers.Authentication = authStore.state.userInfo.token
     }
 
-    console.log(config)
-
     return config
   },
   (error) => {

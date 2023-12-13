@@ -25,7 +25,7 @@
 							</el-form-item>
 
 							<el-form-item label="郵遞區號" prop="postal_code">
-								<el-input  v-model="formData.postal_code"/>
+								<el-input  v-model="formData.postal_code" type="number"/>
 							</el-form-item>
 
 							<el-form-item label="地址" prop="address">
@@ -41,7 +41,7 @@
 					</div>
 					<div class="modal-footer">
 						<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">關閉</button>
-						<button type="button" class="btn btn-primary" @clikc="handleSubmit()">送出</button>
+						<button type="button" class="btn btn-primary" @click="handleSubmit()">送出</button>
 					</div>
 				</div>
 			</div>
@@ -50,6 +50,7 @@
 <script setup>
 import { ref, onMounted, defineExpose } from 'vue';
 import { Modal } from 'bootstrap';
+import { apiCreateDonate } from '@/utils/api.js'
 
 const theModal = ref("")
 let bsModal = ""
@@ -87,7 +88,6 @@ const handleSubmit = () => {
   formEl.value.validate(async (valid) => {
     // console.log(formData.value)
     if (valid) {
-		
 			await apiCreateDonate(formData.value)
 			ElMessage.success("已傳至管理員");
 

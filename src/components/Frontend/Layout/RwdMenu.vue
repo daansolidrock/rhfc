@@ -1,5 +1,5 @@
 <template lang="">
-    <div ref="theOffcanvas" class="offcanvas offcanvas-end" data-bs-scroll="false" data-bs-backdrop="trhe" tabindex="-1" id="offcanvasWithBackdrop" aria-labelledby="offcanvasWithBackdropLabel">
+    <div ref="theOffcanvas" class="offcanvas offcanvas-start" data-bs-scroll="false" data-bs-backdrop="trhe" tabindex="-1" id="offcanvasWithBackdrop" aria-labelledby="offcanvasWithBackdropLabel">
         <div class="offcanvas-header">
             <h5 class="offcanvas-title" id="offcanvasWithBackdropLabel"></h5>
             <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>

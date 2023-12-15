@@ -192,10 +192,6 @@ onMounted(() => {
   user-select: none;
 }
 
-.part{
-  margin-top: 150px;
-}
-
 @media(max-width:768px){
   .mask{
     left: 50%;
@@ -207,6 +203,119 @@ onMounted(() => {
   }
 }
 
+
+///////
+.part{
+  margin-top: 150px;
+}
+.txt-wrap:before {
+	content: "";
+	z-index: -1;
+	position: absolute;
+	width: 120%;
+	height: 110%;
+	background-color: #f3ece9;
+	bottom: -20px;
+	right: -20px;
+	border-right: 3px solid #a36549;
+}
+
+.img-wrap {
+	z-index: 1;
+}
+
+.gaspel-center{
+	.gaspel-center-content{
+		margin-left: 20px;
+
+		h2{
+			font-size: 40px;
+			font-weight: bold;
+			margin-bottom: 20px;
+			
+		}
+
+		span{
+			border-bottom: 1px solid #4F4F51;
+		}
+
+		.subtip{
+			margin-bottom: 10px;
+		}
+
+		p{
+			margin: 25px 0 20px;
+			line-height: 2;
+			letter-spacing: 3.5px;
+		}
+	}
+
+	img{
+		width: 100%;
+	}
+}
+
+
+.balance-church{
+
+	h2{
+		font-size: 40px;
+		font-weight: bold;
+		margin-bottom: 20px;
+		
+	}
+
+	span{
+		border-bottom: 1px solid #4F4F51;
+	}
+
+	.subtip{
+		margin-bottom: 10px;
+	}
+
+	p{
+		margin: 25px 0 20px;
+		line-height: 2.25;
+		letter-spacing: 5px;
+	}
+	.deco-block {
+		width: 100%;
+		/* margin-right: 12%; */
+		position: relative;
+		background-image: url(https://iamamberhh.github.io/sollys/assets/images/about-img.jpeg);
+		height: 500px;
+		background-position: center;
+		background-size: cover;
+	}
+	
+	.deco-block::after {
+		content: "";
+		position: absolute;
+		top: 30px;
+		left: 150px;
+		background-color: #DADDDA;
+		width: 80%;
+		height: 100%;
+		z-index: -5;
+	}
+
+	.deco-sunset {
+		position: absolute;
+		width: 180px;
+		height: 180px;
+    right: 0px;
+	}
+}
+
+
+
+@media(max-width:1200px){
+  .gaspel-center{
+		.gaspel-center-content{
+			margin-top: 50px;
+		}
+	}
+}
 
 
 </style>

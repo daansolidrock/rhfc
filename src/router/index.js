@@ -11,7 +11,11 @@ const router = createRouter({
       children: [
         {
           path: '',
-          component: () => import('@/views/frontend/HomeView.vue')
+          component: () => import('@/views/frontend/HomeView.vue'),
+          meta: {
+            footerShow: true,
+            // logoShow: true
+          }
         }
       ]
     },

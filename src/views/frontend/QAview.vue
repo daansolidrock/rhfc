@@ -69,7 +69,7 @@
 						</div>
 					</div>
 
-					<el-form-item label="備註">
+					<el-form-item label="問題內容">
 						<el-input v-model="formData.note" type="textarea" />
 					</el-form-item>
 

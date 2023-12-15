@@ -30,6 +30,87 @@
       認識十架的教會
     </div>
   </div>
+
+  <section class="part">
+			<div class="container gaspel-center">
+				<div class="row flex-row-reverse">
+					<div 
+						class="col-xl-7"
+						data-aos="fade-down" 	
+					>
+						<img  style="width: 100%; height:422px; object-fit: cover" src="https://cdn.pixabay.com/photo/2015/03/30/14/35/love-699480_1280.jpg" alt="picture">
+					</div>
+
+					<div class="col-xl-5 d-flex align-items-center">
+						<div class="gaspel-center-content" data-aos="fade-up">
+							<div class="subtip">GOSPEL</div>
+							<h2>
+								<span>以福音為中心的教會</span>
+							</h2>
+							<!-- <h2>
+								<span>是什麼樣？</span>
+							</h2> -->
+							<p>福音就是基督為自己百姓做成的救恩，教會以此為中心不斷發現福音的恩典運用在生命上，離開以行為換取祝福的宗教模式。</p>
+							<!-- <img src="https://iamamberhh.github.io/sollys/assets/images/dream-1.png" alt="slogan"> -->
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<section class="part">
+			<div class="container gaspel-center">
+				<div class="row">
+					<div 
+						class="col-xl-7"
+						data-aos="fade-down" 	
+					>
+						<img style="width: 100%; height:422px; object-fit: cover" src="https://cdn.pixabay.com/photo/2016/04/16/18/00/scales-1333455_1280.jpg" alt="picture">
+					</div>
+
+					<div class="col-xl-5 d-flex align-items-center">
+						<div class="gaspel-center-content" data-aos="fade-up">
+							<div class="subtip">BALANCE</div>
+							<h2>
+								<span>兼容平衡的教會</span>
+							</h2>
+							<!-- <h2>
+								<span>是什麼樣？</span>
+							</h2> -->
+							<p>崇拜、團契與使命是健康教會均衡發展的三要素，避免教會成為神學院或內聚的團體。</p>
+							<!-- <img src="https://iamamberhh.github.io/sollys/assets/images/dream-1.png" alt="slogan"> -->
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<section class="part mb-6">
+			<div class="container gaspel-center">
+				<div class="row flex-row-reverse">
+					<div 
+						class="col-xl-7"
+						data-aos="fade-down" 	
+					>
+						<img  style="width: 100%; height:422px; object-fit: cover" src="https://cdn.pixabay.com/photo/2016/11/21/16/09/bible-1846174_1280.jpg" alt="picture">
+					</div>
+
+					<div class="col-xl-5 d-flex align-items-center">
+						<div class="gaspel-center-content" data-aos="fade-up">
+							<div class="subtip">BIBLE</div>
+							<h2>
+								<span>學習聖經的教會</span>
+							</h2>
+							<!-- <h2>
+								<span>是什麼樣？</span>
+							</h2> -->
+							<p>聖經是上帝所啟示的生命之道，因此教會有責任教導信徒聖經真理，指出聖經前後一致的焦點是基督，以及祂如何因為愛所成就的事。</p>
+							<!-- <img src="https://iamamberhh.github.io/sollys/assets/images/dream-1.png" alt="slogan"> -->
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
   <!-- </div> -->
 </template>
 <script setup>
@@ -109,6 +190,10 @@ onMounted(() => {
   font-size: 50px;
   font-weight: bolder;
   user-select: none;
+}
+
+.part{
+  margin-top: 150px;
 }
 
 @media(max-width:768px){

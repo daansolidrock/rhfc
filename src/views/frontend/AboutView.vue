@@ -57,7 +57,7 @@
 							<!-- <h2>
 								<span>是什麼樣？</span>
 							</h2> -->
-							<p>福音就是基督為自己百姓做成的救恩，教會應以此為中心不斷發現福音的恩典運用在生命上，而非認識福音道理後就轉向其他的方法。</p>
+							<p>福音就是基督為自己百姓做成的救恩，教會以此為中心不斷發現福音的恩典運用在生命上，離開以行為換取祝福的宗教模式。</p>
 							<!-- <img src="https://iamamberhh.github.io/sollys/assets/images/dream-1.png" alt="slogan"> -->
 						</div>
 					</div>
@@ -84,7 +84,7 @@
 							<!-- <h2>
 								<span>是什麼樣？</span>
 							</h2> -->
-							<p>崇拜、團契與使命是健康教會的三要素，避免教會單獨成為神學院或內聚的團體，而是在三者之中不斷地循環擴展。</p>
+							<p>崇拜、團契與使命是健康教會均衡發展的三要素，避免教會成為神學院或內聚的團體。</p>
 							<!-- <img src="https://iamamberhh.github.io/sollys/assets/images/dream-1.png" alt="slogan"> -->
 						</div>
 					</div>

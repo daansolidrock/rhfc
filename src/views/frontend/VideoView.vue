@@ -1,6 +1,6 @@
 <template>
 	<ImageSectionVue title='影片專區'
-		background-image='url(https://images.unsplash.com/photo-1497015289639-54688650d173?auto=format&fit=crop&q=80&w=1932&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D)' />
+		background-image='url(/src/assets/images/video/intro01.jpg)' />
 
 	<div class="container py-5">
 		<div class="row">
@@ -157,18 +157,6 @@ onMounted(() => {
 
 </script>
 <style lang="scss" scoped>
-
-/* .txt-wrap:before {
-	content: "";
-	z-index: -1;
-	position: absolute;
-	width: 120%;
-	height: 120%;
-	background-color: #f3ece9;
-	bottom: -20px;
-	right: -20px;
-	border-right: 3px solid #a36549;
-} */
 
 .episode-nav{
 

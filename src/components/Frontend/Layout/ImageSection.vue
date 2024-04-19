@@ -1,15 +1,6 @@
 <template lang="">
     <section class="kv">
         <div class="mask"></div>
-        <!-- <div class="title">
-            <div class="container">
-                <div class="row justify-content-end">
-                    <div class="col-md-5">
-                        <h1>{{ title }}</h1>
-                    </div>
-                </div>
-            </div>
-        </div> -->
 
         <div class="title">
             <h1>{{ title }}</h1>
@@ -49,7 +40,7 @@ section {
         background-image: v-bind(backgroundImage);
         /* background-attachment: fixed; */
         background-position: 50% 50%;
-        /* background-repeat: no-repeat; */
+        background-repeat: no-repeat;
         height: 350px;
         position: relative;
         /* filter: brightness(50%); */

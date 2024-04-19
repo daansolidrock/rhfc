@@ -1,16 +1,16 @@
 <template>
   <swiper :slides-per-view="1" :space-between="50" :autoplay="autoplayOptions" :modules="modules" effect="fade">
     <swiper-slide>
-      <img src="@/assets/images/c.jpg" alt="">
+      <img src="@/assets/images/home/intro01.jpg" alt="">
     </swiper-slide>
     <swiper-slide>
-      <img src="@/assets/images/d.jpg" alt="">
+      <img src="@/assets/images/home/intro02.jpg" alt="">
     </swiper-slide>
     <swiper-slide>
-      <img src="@/assets/images/h.jpeg" alt="">
+      <img src="@/assets/images/home/intro03.jpg" alt="">
     </swiper-slide>
     <swiper-slide>
-      <img src="@/assets/images/k.jpg" alt="">
+      <img src="@/assets/images/home/intro04.jpg" alt="">
     </swiper-slide>
 
   </swiper>
@@ -38,7 +38,7 @@
 						class="col-xl-7"
 						data-aos="fade-down" 	
 					>
-						<img  style="width: 100%; height:422px; object-fit: cover" src="https://cdn.pixabay.com/photo/2015/03/30/14/35/love-699480_1280.jpg" alt="picture">
+						<img  style="width: 100%; height:422px; object-fit: cover" src="@/assets/images/home/01.jpg" alt="picture">
 					</div>
 
 					<div class="col-xl-5 d-flex align-items-center">
@@ -65,7 +65,7 @@
 						class="col-xl-7"
 						data-aos="fade-down" 	
 					>
-						<img style="width: 100%; height:422px; object-fit: cover" src="https://cdn.pixabay.com/photo/2016/04/16/18/00/scales-1333455_1280.jpg" alt="picture">
+						<img style="width: 100%; height:422px; object-fit: cover" src="@/assets/images/home/02.jpg" alt="picture">
 					</div>
 
 					<div class="col-xl-5 d-flex align-items-center">
@@ -92,7 +92,7 @@
 						class="col-xl-7"
 						data-aos="fade-down" 	
 					>
-						<img  style="width: 100%; height:422px; object-fit: cover" src="https://cdn.pixabay.com/photo/2016/11/21/16/09/bible-1846174_1280.jpg" alt="picture">
+						<img  style="width: 100%; height:422px; object-fit: cover" src="@/assets/images/home/03.jpg" alt="picture">
 					</div>
 
 					<div class="col-xl-5 d-flex align-items-center">

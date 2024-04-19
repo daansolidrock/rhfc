@@ -1,5 +1,5 @@
 <template lang="">
-    <ImageSectionVue title='關於我們' background-image='url(https://hexschool-api.s3.us-west-2.amazonaws.com/custom/U8YjSv6kB6Hfx6uYp42LSDTcZ6fPUvRSqzIhvWeaPGjyHqjlLFV7FSKJZijzQEFsRsgbjPfuK7M4Ai7Pvk15Gz3gyHFEa2O2lEQ0HxXysp1GEQH0MQsuNdMkXcCCvcy9.jpg)'/>
+    <ImageSectionVue title='關於我們' background-image='url(/src/assets/images/about/intro01.jpg)'/>
 
 		<section class="part">
 			<div class="container-md gaspel-center">
@@ -10,7 +10,7 @@
 						class="col-xl-4 pastor"
 						data-aos="fade-down"
 					>
-						<img class="pastor" src="@/assets/images/IMG_2646.jpg" alt="picture">
+						<img class="pastor" src="@/assets/images/about/paster01.jpg" alt="picture">
 					</div>
 					
 					<div class="col-xl-8 d-flex align-items-center">
@@ -43,7 +43,7 @@
 						class="col-xl-7"
 						data-aos="fade-down" 	
 					>
-						<img style="width: 100%; height:422px; object-fit: cover" src="@/assets/images/IMG_2647.jpg" alt="picture">
+						<img style="width: 100%; height:422px; object-fit: cover" src="@/assets/images/about/paster02.jpg" alt="picture">
 					</div>
 
 					<div class="col-xl-5 d-flex align-items-center">
@@ -74,14 +74,14 @@
         <img
           class="img-fluid"
           data-aos="fade-down"
-          src="@/assets/images/city_lights.png"
+          src="@/assets/images/about/city_lights.png"
           alt=""
         >
       </div>
       <div class="img-wrap d-md-none">
         <img
           class="img-fluid"
-          src="@/assets/images/city_lights.png"
+          src="@/assets/images/about/city_lights.png"
           alt=""
         >
       </div>

@@ -1,5 +1,5 @@
 <template lang="">
-    <ImageSectionVue title='關於我們' background-image='url(@/assets/images/about/intro01.jpg)'/>
+    <ImageSectionVue title='關於我們' background-image='url(https://hexschool-api.s3.us-west-2.amazonaws.com/custom/U8YjSv6kB6Hfx6uYp42LSDTcZ6fPUvRSqzIhvWeaPGjyHqjlLFV7FSKJZijzQEFsRsgbjPfuK7M4Ai7Pvk15Gz3gyHFEa2O2lEQ0HxXysp1GEQH0MQsuNdMkXcCCvcy9.jpg)'/>
 
 		<section class="part">
 			<div class="container-md gaspel-center">

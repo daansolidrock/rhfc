@@ -1,12 +1,12 @@
 <template>
 	<ImageSectionVue title='奉獻'
-		background-image='url(@/assets/images/donate/intro01.jpg)' />
+		background-image='url(/src/assets/images/donate/intro01.jpg)' />
 
 	<div class="container-lg mt-7 mb-7">
 		<div class="row justify-content-center">
 			<div class="col-lg-6" data-aos="fade-down">
 				<img
-					src="@/assets/images/donate/01.jpg"
+					src="https://images.pexels.com/photos/5206048/pexels-photo-5206048.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
 					style="width:100%;height:500px;object-fit: cover; " alt="">
 			</div>
 
@@ -50,6 +50,11 @@ import { ref } from 'vue'
 import DonateModalVue from '@/components/Frontend/Modal/DonateModal.vue';
 import ImageSectionVue from '@/components/Frontend/Layout/ImageSection.vue';
 
+// const donateModalEl = ref(null);
+
+// const openDonateModal = () => {
+// 	donateModalEl.value.open();
+// }
 
 const show = ref(false)
 const theModal = ref()

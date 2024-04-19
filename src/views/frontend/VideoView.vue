@@ -1,6 +1,6 @@
 <template>
 	<ImageSectionVue title='影片專區'
-		background-image='url(/src/assets/images/video/intro01.jpg)' />
+		background-image='url(@/assets/images/video/intro01.jpg)' />
 
 	<div class="container py-5">
 		<div class="row">

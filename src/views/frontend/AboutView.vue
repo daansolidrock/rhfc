@@ -1,5 +1,5 @@
 <template lang="">
-    <ImageSectionVue title='關於我們' background-image='url(/src/assets/images/about/intro01.jpg)'/>
+    <ImageSectionVue title='關於我們' background-image='url(@/assets/images/about/intro01.jpg)'/>
 
 		<section class="part">
 			<div class="container-md gaspel-center">

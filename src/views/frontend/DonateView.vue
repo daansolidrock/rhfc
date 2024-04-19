@@ -1,6 +1,6 @@
 <template>
 	<ImageSectionVue title='奉獻'
-		background-image='url(/src/assets/images/donate/intro01.jpg)' />
+		background-image='url(@/assets/images/donate/intro01.jpg)' />
 
 	<div class="container-lg mt-7 mb-7">
 		<div class="row justify-content-center">

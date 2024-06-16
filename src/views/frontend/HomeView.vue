@@ -1,8 +1,14 @@
 <template>
   <swiper :slides-per-view="1" :space-between="50" :autoplay="autoplayOptions" :modules="modules" effect="fade">
-    <swiper-slide>
-      <img src="@/assets/images/home/intro01.jpg" alt="">
+    <swiper-slide class="d-md-none">
+      <img src="@/assets/images/home/網頁圖片.jpg" alt="">
     </swiper-slide>
+		<swiper-slide class="d-none d-md-block">
+      <img src="@/assets/images/home/網頁圖片3.jpg" alt="">
+    </swiper-slide>
+		<!-- <swiper-slide class="d-none d-md-block">
+      <img src="@/assets/images/home/intro01.jpg" alt="">
+    </swiper-slide> -->
     <swiper-slide>
       <img src="@/assets/images/home/intro02.jpg" alt="">
     </swiper-slide>
@@ -45,7 +51,7 @@
 						<div class="gaspel-center-content" data-aos="fade-up">
 							<div class="subtip">GOSPEL</div>
 							<h2>
-								<span>以福音為中心的教會</span>
+								<span class="">以福音為中心的教會</span>
 							</h2>
 							<!-- <h2>
 								<span>是什麼樣？</span>
@@ -163,6 +169,7 @@ onMounted(() => {
   width: 100%;
   height: 100%;
   object-fit: cover;
+	object-position: left top;
 }
 
 .mask {
@@ -179,7 +186,7 @@ onMounted(() => {
   /* backdrop-filter: blur(15px); */
   position: absolute;
   top: 50%;
-  left: 30%;
+  left: 40%;
   transform: translate(-50%, -50%);
   z-index: 10;
 }
@@ -199,7 +206,7 @@ onMounted(() => {
   }
 
   .txt{
-    font-size: 35px;
+    font-size: 28px;
   }
 }
 
@@ -307,13 +314,17 @@ onMounted(() => {
 	}
 }
 
-
-
 @media(max-width:1200px){
   .gaspel-center{
 		.gaspel-center-content{
 			margin-top: 50px;
 		}
+	}
+}
+
+@media(max-width: 768px){
+	.mask{
+		left: 50%;
 	}
 }
 

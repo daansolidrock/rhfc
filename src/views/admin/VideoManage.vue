@@ -25,6 +25,7 @@
 					<el-form-item>
 						<!-- <el-button type="primary" @click="onSubmit">查詢</el-button> -->
 						<el-button type="primary" @click="handleCreate">新增</el-button>
+						<el-button type="warning" @click="handleCreate">更新最新主日證道</el-button>
 					</el-form-item>
 				</el-form>
 
@@ -47,7 +48,8 @@
 			<el-table-column label="操作" width="150px">
 				<template #default="scope">
 					<el-button type="info" size="small" @click="handleEdit(scope.row)">編輯</el-button>
-					<el-button type="danger" size="small" @click="handleRemove(scope.row)">刪除</el-button>
+					<!-- <el-button type="danger" size="small" @click="handleRemove(scope.row)">刪除</el-button> -->
+					<el-button type="warning" size="small" >更新</el-button>
 				</template>
 			</el-table-column>
 		</el-table>

@@ -4,14 +4,15 @@
             <div class="row">
                 <div class="col-md-6">
                     <div class="line logo">
-                        <img src="@/assets/logo/LOGO.png" alt="">
-                        <div class="name">
+                        <!-- <img src="@/assets/logo/LOGO.png" alt=""> -->
+                        <!-- <div class="name">
                             中華磐石之心城市更新協會
-                        </div>
+                        </div> -->
+                        <img src="@/assets/logo/logo_fonts.png" alt="">
                     </div>
-                    <div class="line">
+                    <!-- <div class="line">
                         Rock Hard Faith Church in Taichung
-                    </div>
+                    </div> -->
                     <div class="line">
                         <a href="https://www.facebook.com/daansolidrock/?locale=zh_TW" target="_blank">
                             <i class="fa-brands fa-facebook icon link"></i>
@@ -73,8 +74,9 @@ section {
 
 /* 526 × 386 */
 img {
-    width: 40px;
+    /* width: 40px; */
     /* height: 57px; */
+    width: 55%;
 }
 
 .line {
@@ -129,10 +131,18 @@ img {
     margin-top: 20px;
 }
 
-
 @media screen and (max-width: 767px) {
     .right-side{
         margin-top: 30px;
+    }
+    img {
+        width: 60%;
+    }
+}
+
+@media screen and (max-width: 411px) {
+    img {
+        width: 100%;
     }
 }
 </style>

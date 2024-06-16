@@ -1,10 +1,10 @@
 <template>
   <swiper :slides-per-view="1" :space-between="50" :autoplay="autoplayOptions" :modules="modules" effect="fade">
     <swiper-slide class="d-md-none">
-      <img src="@/assets/images/home/網頁圖片.jpg" alt="">
+      <img src="@/assets/images/home/網頁圖片.jpg" class="special" alt="">
     </swiper-slide>
 		<swiper-slide class="d-none d-md-block">
-      <img src="@/assets/images/home/網頁圖片3.jpg" alt="">
+      <img src="@/assets/images/home/網頁圖片3.jpg"  class="special" alt="">
     </swiper-slide>
 		<!-- <swiper-slide class="d-none d-md-block">
       <img src="@/assets/images/home/intro01.jpg" alt="">
@@ -169,8 +169,12 @@ onMounted(() => {
   width: 100%;
   height: 100%;
   object-fit: cover;
+}
+
+.swiper-slide .special{
 	object-position: left top;
 }
+
 
 .mask {
   height: 300px;
@@ -197,6 +201,7 @@ onMounted(() => {
   font-size: 50px;
   font-weight: bolder;
   user-select: none;
+	text-align: center;
 }
 
 @media(max-width:768px){

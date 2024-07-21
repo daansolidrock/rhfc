@@ -3,7 +3,7 @@
         <div class="container info" >
             <div class="row">
                 <div class="col-md-6">
-                    <div class="line logo">
+                    <div class="logo">
                         <!-- <img src="@/assets/logo/LOGO.png" alt=""> -->
                         <!-- <div class="name">
                             中華磐石之心城市更新協會
@@ -76,7 +76,7 @@ section {
 img {
     /* width: 40px; */
     /* height: 57px; */
-    width: 55%;
+    width: 270px;
 }
 
 .line {
@@ -136,13 +136,14 @@ img {
         margin-top: 30px;
     }
     img {
-        width: 60%;
+        width: 305px;
     }
 }
 
-@media screen and (max-width: 411px) {
-    img {
+@media screen and (max-width: 414px) {
+    img{
         width: 100%;
     }
 }
+
 </style>

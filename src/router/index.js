@@ -32,6 +32,14 @@ const router = createRouter({
           }
         },
         {
+          path: 'belief',
+          component: () => import('@/views/frontend/BeliefView.vue'),
+          meta: {
+            footerShow: true,
+            logoShow: true
+          }
+        },
+        {
           path: 'video',
           name: 'video',
           component: () => import('@/views/frontend/VideoView.vue'),

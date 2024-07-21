@@ -8,11 +8,11 @@
 				<router-link to="/about" class="nav-link">關於我們</router-link>
 			</li>
 			<li>
+				<router-link to="/belief" class="nav-link">信仰宣言</router-link>
+			</li>
+			<li>
 				<router-link to="/video" class="nav-link">影片專區</router-link>
 			</li>
-			<!-- <li>
-				<router-link to="/resource" class="nav-link">資源下載</router-link>
-			</li> -->
 			<li>
 				<router-link to="/donate" class="nav-link">奉獻</router-link>
 			</li>

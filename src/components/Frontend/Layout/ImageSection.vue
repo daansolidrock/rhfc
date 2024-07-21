@@ -63,6 +63,10 @@ section {
         padding: 50px 100px;
         /* backdrop-filter: blur(8px); */
         /* background-color: #d2d4d137; */
+        width: 100%;
+    }
+    h1{
+        text-align: center;
     }
 
 }
@@ -71,7 +75,7 @@ section {
     section {
         &.kv {
             height: 300px;
-            background-position: 50% 0px;
+            /* background-position: 50% 0px; */
         }
     }
 }

@@ -1,0 +1,81 @@
+{
+  // 說明：此檔僅供閱讀教學。程式實際載入的是 blogList.json（純 JSON）。
+  "meta": {
+    "version": 1,
+    "updated_at": "2025-08-10T12:30:00Z",
+    "default_locale": "zh-TW"
+  },
+
+  "posts": [
+    {
+      // 必填：slug 會對應路由 #/blog/:slug
+      "slug": "your-slug",
+      // 必填：文章標題（會顯示在卡片與麵包屑）
+      "title": "文章標題",
+      // 必填：ISO 8601 時間字串
+      "published_at": "2025-08-01T12:00:00Z",
+      // 必填：卡片上的標籤陣列
+      "tags": ["TagA", "TagB"],
+      // 必填：卡片封面與內文置頂圖片
+      "cover": "https://.../cover.jpg",
+
+      // 可選：整篇排版控制（會映射到 CSS 變數）
+      "options": {
+        // 整篇首行縮排開關（中文常用 2em）
+        "indent": true,
+        // 首行縮排量，覆蓋預設（ex: "2em"）
+        "p_indent": "2em",
+        // 段落與下一元素的間距（ex: "1.1rem"）
+        "p_gap": "1.1rem",
+        // 段落字重（"400" | "500" | "600" | "700"）
+        "p_weight": "500"
+      },
+
+      // 內文由「區塊陣列」組成
+      "blocks": [
+        { "type": "h1", "text": "大標題" },
+
+        // 段落（純文字）
+        { "type": "p", "text": "一般段落文字。" },
+
+        // 段落（行內 Markdown）→ 可用 **粗體**、*斜體*、`inline code`、[連結](https://...)
+        // 使用方式：加上 "format": "md"
+        { "type": "p", "format": "md", "text": "有 **粗體**、*斜體*、`code` 與 [連結](https://example.com)。" },
+
+        // 單段排版覆寫：
+        // indent: true/false（首行縮排）、mb: "1.5rem"（段落底部距離）
+        { "type": "p", "text": "這段特別要縮排 + 多留空白。", "indent": true, "mb": "1.5rem" },
+
+        // 圖片
+        { "type": "img", "src": "https://.../image.jpg", "alt": "圖片說明" },
+
+        // 清單：style = "ul" | "ol"
+        { "type": "list", "style": "ul", "items": ["項目 A", "項目 B"] },
+
+        // 任務清單
+        { "type": "task_list", "items": [
+          { "text": "待辦 1", "checked": true },
+          { "text": "待辦 2", "checked": false }
+        ]},
+
+        // 程式碼區塊（多行）
+        { "type": "code", "lang": "ts", "code": "const x: number = 1;\nconsole.log(x);" },
+
+        // 表格
+        { "type": "table", "header": ["欄位", "值"], "rows": [["A","1"],["B","2"]] },
+
+        // 引用
+        { "type": "quote", "text": "引用的文字內容。", "cite": "作者名" },
+
+        // 提示框（note | info | success | warning | danger）
+        { "type": "callout", "variant": "warning", "title": "注意", "text": "這裡是提醒文字。" },
+
+        // 水平線
+        { "type": "hr" },
+
+        // 影片（YouTube）
+        { "type": "video", "provider": "youtube", "id": "dQw4w9WgXcQ", "title": "示範影片" }
+      ]
+    }
+  ]
+}

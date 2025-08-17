@@ -10,8 +10,8 @@ import router from './router'
 import '@fortawesome/fontawesome-free/css/all.css'
 import '@fortawesome/fontawesome-free/js/all.js'
 
-import 'bootstrap';
-import './assets/style/all.scss';
+import 'bootstrap'
+import './assets/style/all.scss'
 
 const app = createApp(App)
 

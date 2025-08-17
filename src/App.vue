@@ -1,20 +1,11 @@
 <template>
-  <!-- <NavBar /> -->
-  <RouterView/>
-
-  <!-- <span v-if="$route.meta.footerShow">
-    <FooterSectionVue />
-  </span> -->
-
-  <el-backtop :right="100" :bottom="100" />
-  
+  <RouterView />
+  <!-- <el-backtop :right="100" :bottom="100" /> -->
 </template>
 
 <script setup>
 import { onMounted } from 'vue'
 import { RouterView } from 'vue-router'
-// import NavBar from './components/NavBar.vue';
-// import FooterSectionVue from './components/FooterSection.vue';
 
 import AOS from 'aos';
 import 'aos/dist/aos.css';

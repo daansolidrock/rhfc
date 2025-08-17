@@ -1,4 +1,4 @@
-import{r as w,x as j,w as M,b as i,c as o,e as S,y as Q,d as s,F as l,z as b,g as D,A as a,i as L,n as y,B as F}from"./index-5a73aecb.js";import{I as N}from"./ImageSection-bc562bb3.js";import{_ as O}from"./_plugin-vue_export-helper-c27b6911.js";const Y={version:1,updated_at:"2025-08-17T10:45:00Z",default_locale:"zh-TW"},K={解經講道:{彼得前書:[{url:"https://www.youtube.com/watch?v=EzKmEjc44CU",title:"解經講道：彼得前書四章12-11節｜考驗是快樂的事｜高文聰牧師｜20250803",description:`有時候考驗來我們會想要逃避，有的人會想要用一些方法或魔法，想要趨吉避凶。
+import{r as w,x as j,w as M,b as i,c as o,e as S,y as Q,d as s,F as l,z as b,g as D,A as a,i as L,n as y,B as F}from"./index-4a11acaa.js";import{I as N}from"./ImageSection-df61ef15.js";import{_ as O}from"./_plugin-vue_export-helper-c27b6911.js";const Y={version:1,updated_at:"2025-08-17T10:45:00Z",default_locale:"zh-TW"},K={解經講道:{彼得前書:[{url:"https://www.youtube.com/watch?v=EzKmEjc44CU",title:"解經講道：彼得前書四章12-11節｜考驗是快樂的事｜高文聰牧師｜20250803",description:`有時候考驗來我們會想要逃避，有的人會想要用一些方法或魔法，想要趨吉避凶。
 於是會去找一些宗教，看看可不可以改運。
 今天不用改運，而是要改你對考驗或是面對苦難時的觀念。
 

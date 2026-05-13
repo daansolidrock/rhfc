@@ -1,14 +1,15 @@
-<template lang="">
-    <section class="kv">
-        <div class="mask"></div>
-
-        <div class="title">
-            <h1>{{ title }}</h1>
+<template>
+    <section class="kv" :style="kvStyle">
+        <div class="kv-overlay"></div>
+        <div class="kv-content">
+            <h1 class="kv-title">{{ title }}</h1>
+            <div class="kv-divider"></div>
         </div>
     </section>
 </template>
 
 <script setup>
+import { computed } from 'vue'
 
 const props = defineProps({
     title: {
@@ -21,62 +22,64 @@ const props = defineProps({
     }
 })
 
+const kvStyle = computed(() => ({
+    backgroundImage: props.backgroundImage
+}))
 </script>
 
 <style lang="scss" scoped>
-section {
-    /* width: 100%; */
+.kv {
     position: relative;
+    height: 350px;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
 
-    .mask {
-        width: 100%;
-        height: 100%;
-        background-color: rgba(0, 0, 0, 0.447);
-    }
+.kv-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+        to bottom,
+        rgba(27, 42, 74, 0.6) 0%,
+        rgba(27, 42, 74, 0.4) 100%
+    );
+}
 
-    &.kv {
-        /* https://hexschool-api.s3.us-west-2.amazonaws.com/custom/U8YjSv6kB6Hfx6uYp42LSDTcZ6fPUvRSqzIhvWeaPGjyHqjlLFV7FSKJZijzQEFsRsgbjPfuK7M4Ai7Pvk15Gz3gyHFEa2O2lEQ0HxXysp1GEQH0MQsuNdMkXcCCvcy9.jpg */
-        /* background-image: url('@/assets/images/patrick-fore-b_SHPU5M3nk-unsplash.jpg'); */
-        background-image: v-bind(backgroundImage);
-        /* background-attachment: fixed; */
-        background-position: 50% 50%;
-        background-repeat: no-repeat;
-        height: 350px;
-        position: relative;
-        /* filter: brightness(50%); */
-    }
+.kv-content {
+    position: relative;
+    z-index: 1;
+    text-align: center;
+}
 
-    .title {
-        /* position: absolute;
-        left: 0;
-        right: 0;
-        bottom: 10%;
-        color: white; */
+.kv-title {
+    font-family: var(--font-serif);
+    color: white;
+    font-size: 2.5rem;
+    font-weight: 700;
+    letter-spacing: 8px;
+    margin-bottom: 16px;
+    text-shadow: 0 2px 12px rgba(0, 0, 0, 0.3);
+}
 
-        position: absolute;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        top: 50%;
-        color: white;
-        /* border: 1px solid white; */
-        border-radius: 10px;
-        padding: 50px 100px;
-        /* backdrop-filter: blur(8px); */
-        /* background-color: #d2d4d137; */
-        width: 100%;
-    }
-    h1{
-        text-align: center;
-    }
-
+.kv-divider {
+    width: 60px;
+    height: 2px;
+    background-color: var(--color-accent);
+    margin: 0 auto;
 }
 
 @media screen and (max-width: 767px) {
-    section {
-        &.kv {
-            height: 300px;
-            /* background-position: 50% 0px; */
-        }
+    .kv {
+        height: 280px;
+    }
+
+    .kv-title {
+        font-size: 1.8rem;
+        letter-spacing: 5px;
     }
 }
 </style>

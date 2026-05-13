@@ -1,30 +1,35 @@
 <template>
-	<nav class="navbar fixed-top" :class="{ active: isActive }">
-		<div class="container-lg d-none d-md-flex justify-content-end">
-			<!-- 首頁：只有當不是首頁的時候才顯示 -->
-			<li v-if="$route.path !== '/'">
-				<router-link to="/" class="nav-link" :class="{ activeLink: $route.path === '/' }">首頁</router-link>
-			</li>
+	<nav class="navbar fixed-top" :class="{ scrolled: isScrolled }">
+		<div class="container-lg navbar-inner">
+			<router-link to="/" class="navbar-brand">
+				<img src="@/assets/logo/LOGO.png" alt="磐石之心" class="brand-logo" />
+			</router-link>
 
+			<ul class="nav-links d-none d-md-flex">
+				<li v-if="$route.path !== '/'">
+					<router-link to="/" class="nav-link" :class="{ active: $route.path === '/' }">首頁</router-link>
+				</li>
+				<li>
+					<router-link to="/about" class="nav-link" :class="{ active: $route.path === '/about' }">關於我們</router-link>
+				</li>
+				<li>
+					<router-link to="/belief" class="nav-link" :class="{ active: $route.path === '/belief' }">信仰宣言</router-link>
+				</li>
+				<li>
+					<router-link to="/video" class="nav-link" :class="{ active: $route.path === '/video' }">影片專區</router-link>
+				</li>
+				<li>
+					<router-link to="/blog" class="nav-link"
+						:class="{ active: $route.path.startsWith('/blog') }">文章專區</router-link>
+				</li>
 			<li>
-				<router-link to="/about" class="nav-link" :class="{ activeLink: $route.path === '/about' }">關於我們</router-link>
+				<router-link to="/service" class="nav-link" :class="{ active: $route.path === '/service' }">聚會資訊</router-link>
 			</li>
-			<li>
-				<router-link to="/belief" class="nav-link" :class="{ activeLink: $route.path === '/belief' }">信仰宣言</router-link>
-			</li>
-			<li>
-				<router-link to="/video" class="nav-link" :class="{ activeLink: $route.path === '/video' }">影片專區</router-link>
-			</li>
-			<li>
-				<router-link to="/blog" class="nav-link"
-					:class="{ activeLink: $route.path.startsWith('/blog') }">文章專區</router-link>
-			</li>
-		</div>
+			</ul>
 
-		<div class="container-lg d-block d-md-none">
-			<li @click="openRwdMenu()">
+			<button class="menu-toggle d-md-none" @click="openRwdMenu" aria-label="開啟選單">
 				<i class="fa-solid fa-bars"></i>
-			</li>
+			</button>
 		</div>
 	</nav>
 
@@ -32,73 +37,144 @@
 </template>
 
 <script setup>
-import { ref, onMounted } from 'vue'
-import { useRoute } from 'vue-router'
+import { ref, onMounted, onUnmounted } from 'vue'
 import RwdMenuVue from './RwdMenu.vue'
 
-const isActive = ref(false)
+const isScrolled = ref(false)
 const rwdMenuEl = ref(null)
-const route = useRoute()
+
+const onScroll = () => {
+	isScrolled.value = window.pageYOffset > 60
+}
 
 onMounted(() => {
-	window.addEventListener("scroll", () => {
-		var curr = window.pageYOffset;
-		isActive.value = curr > 300
-	});
-});
+	window.addEventListener('scroll', onScroll, { passive: true })
+})
+
+onUnmounted(() => {
+	window.removeEventListener('scroll', onScroll)
+})
 
 const openRwdMenu = () => {
-	rwdMenuEl.value.open();
+	rwdMenuEl.value.open()
 }
 </script>
 
 <style lang="scss" scoped>
 .navbar {
-	padding: 10px;
+	padding: 14px 0;
+	width: 100%;
+	transition: all 0.3s ease;
+	z-index: 1030;
+}
+
+.navbar-inner {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+}
+
+.navbar-brand {
+	display: flex;
+	align-items: center;
+	text-decoration: none;
+}
+
+.brand-logo {
+	height: 42px;
+	width: auto;
+	filter: brightness(0) invert(1);
+	transition: all 0.3s ease;
+}
+
+.scrolled .brand-logo {
+	height: 36px;
+	filter: none;
+}
+
+.nav-links {
+	list-style: none;
+	display: flex;
+	align-items: center;
+	gap: 8px;
 	margin: 0;
-	width: 100vw;
-	transition-duration: .3s;
+	padding: 0;
+}
 
-	li {
-		list-style: none;
-		padding: 0px 10px;
-		margin: 0px 20px;
+.nav-link {
+	color: rgba(255, 255, 255, 0.9);
+	text-decoration: none;
+	font-size: 16px;
+	font-weight: 600;
+	padding: 6px 16px;
+	position: relative;
+	transition: color 0.3s ease;
+	letter-spacing: 1px;
+
+	&::after {
+		content: '';
+		position: absolute;
+		bottom: 0;
+		left: 50%;
+		transform: translateX(-50%);
+		width: 0;
+		height: 2px;
+		background-color: var(--color-accent);
+		transition: width 0.3s ease;
+	}
+
+	&:hover {
 		color: white;
-		font-size: 18px;
-		user-select: none;
-		font-weight: bolder;
 
-		:hover {
-			color: #fc832c;
+		&::after {
+			width: 60%;
 		}
 	}
 
-	.nav-link {
+	&.active {
 		color: white;
-		text-decoration: none;
-	}
 
-	/* 只針對完全比對才亮 */
-	.activeLink {
-		color: #fc832c !important;
+		&::after {
+			width: 60%;
+			background-color: var(--color-accent);
+		}
 	}
 }
 
-.active {
-	background-color: rgb(255, 255, 255);
-	transition-duration: .3s;
-	box-shadow: 0 4px 8px 0 rgb(36 36 36 / 20%);
+.menu-toggle {
+	background: none;
+	border: none;
+	color: white;
+	font-size: 22px;
+	padding: 8px;
+	cursor: pointer;
+	transition: color 0.3s ease;
+}
 
-	li {
-		color: rgb(131, 123, 123);
+/* Scrolled state */
+.scrolled {
+	background-color: var(--color-bg-white);
+	box-shadow: 0 2px 20px rgba(0, 0, 0, 0.08);
+	padding: 10px 0;
+
+	.brand-logo {
+		filter: none;
 	}
 
 	.nav-link {
-		color: rgb(131, 123, 123);
+		color: var(--color-text-muted);
+
+		&:hover {
+			color: var(--color-primary);
+		}
+
+		&.active {
+			color: var(--color-primary);
+		}
 	}
 
-	.activeLink {
-		color: #fc832c !important;
+	.menu-toggle {
+		color: var(--color-primary);
 	}
 }
 </style>

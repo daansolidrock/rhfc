@@ -28,7 +28,12 @@ const router = createRouter({
           component: () => import('@/views/VideoView.vue'),
           meta: { footerShow: true, logoShow: true }
         },
-        // 這行是重點：slug 為「可選參數」
+        {
+          path: 'service',
+          name: 'service',
+          component: () => import('@/views/ServiceView.vue'),
+          meta: { footerShow: true, logoShow: true }
+        },
         {
           path: 'blog/:slug?',
           name: 'blog',

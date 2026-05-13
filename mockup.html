@@ -1,0 +1,974 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>磐石之心 — 視覺設計 Mockup (含動效)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700&family=Noto+Serif+TC:wght@400;600;700;900&display=swap" rel="stylesheet" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<style>
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+  --navy: #1B2A4A;
+  --navy-light: #2A3F6A;
+  --navy-dark: #111C33;
+  --gold: #C9A94E;
+  --gold-light: #E2D5A0;
+  --gold-pale: rgba(201, 169, 78, 0.08);
+  --bg: #F7F5F0;
+  --bg-white: #FFFFFF;
+  --text: #2C2C2C;
+  --text-muted: #6B7280;
+  --text-light: #9CA3AF;
+  --border: #E5E7EB;
+  --footer-bg: #111827;
+  --serif: 'Noto Serif TC', serif;
+  --sans: 'Noto Sans TC', sans-serif;
+  --ease: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+html { overflow-x: hidden; }
+body {
+  font-family: var(--sans);
+  color: var(--text);
+  background: var(--bg);
+  line-height: 1.8;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+h1,h2,h3,h4,h5,h6 { font-family: var(--serif); color: var(--navy); line-height: 1.35; }
+a { color: var(--navy); text-decoration: none; transition: color 0.3s; }
+a:hover { color: var(--gold); }
+img { max-width: 100%; display: block; }
+.container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+.gold-line-center { width: 60px; height: 2px; background: var(--gold); margin: 0 auto; }
+
+/* =========================================================
+   FIXED NAVBAR
+   ========================================================= */
+.site-nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  padding: 18px 0;
+  transition: all 0.4s ease;
+}
+.site-nav.scrolled {
+  background: rgba(255,255,255,0.97);
+  backdrop-filter: blur(12px);
+  box-shadow: 0 2px 24px rgba(0,0,0,0.06);
+  padding: 12px 0;
+}
+.site-nav .nav-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.nav-logo {
+  font-family: var(--serif);
+  font-size: 20px;
+  font-weight: 900;
+  color: white;
+  letter-spacing: 3px;
+  transition: color 0.4s;
+}
+.nav-logo span { color: var(--gold); }
+.scrolled .nav-logo { color: var(--navy); }
+.nav-links { list-style: none; display: flex; gap: 4px; }
+.nav-links a {
+  color: rgba(255,255,255,0.7);
+  font-size: 14px;
+  font-weight: 600;
+  padding: 8px 18px;
+  position: relative;
+  letter-spacing: 1px;
+  transition: color 0.3s;
+}
+.nav-links a::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 0;
+  height: 2px;
+  background: var(--gold);
+  transition: width 0.3s var(--ease);
+}
+.nav-links a:hover, .nav-links a.active { color: white; }
+.nav-links a:hover::after, .nav-links a.active::after { width: 50%; }
+.scrolled .nav-links a { color: var(--text-muted); }
+.scrolled .nav-links a:hover, .scrolled .nav-links a.active { color: var(--navy); }
+
+/* Scroll progress bar */
+.scroll-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--gold), var(--gold-light));
+  z-index: 1001;
+  width: 0%;
+  transform-origin: left;
+}
+
+/* =========================================================
+   HERO — Parallax multi-layer + cycling text
+   ========================================================= */
+.hero {
+  position: relative;
+  height: 100vh;
+  min-height: 650px;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Background image layer (parallax) */
+.hero-bg {
+  position: absolute;
+  inset: -20%;
+  background: url('https://images.unsplash.com/photo-1504052434569-70ad5836ab65?w=1600&q=80') center/cover no-repeat;
+  will-change: transform;
+}
+.hero-bg-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(160deg,
+    rgba(17,28,51,0.88) 0%,
+    rgba(27,42,74,0.82) 40%,
+    rgba(42,63,106,0.75) 100%);
+}
+
+/* Grid pattern layer */
+.hero-grid {
+  position: absolute;
+  inset: 0;
+  opacity: 0.04;
+  background-image:
+    linear-gradient(rgba(255,255,255,0.4) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.4) 1px, transparent 1px);
+  background-size: 80px 80px;
+  will-change: transform;
+}
+
+/* Floating gold particles */
+.hero-particles {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+}
+.particle {
+  position: absolute;
+  width: 3px;
+  height: 3px;
+  background: var(--gold);
+  border-radius: 50%;
+  opacity: 0;
+}
+
+/* Bottom fade */
+.hero::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 200px;
+  background: linear-gradient(to top, var(--bg), transparent);
+  z-index: 2;
+  pointer-events: none;
+}
+
+/* Content */
+.hero-content {
+  position: relative;
+  z-index: 3;
+  text-align: center;
+  padding: 0 24px;
+}
+
+.hero-line-deco {
+  width: 1px;
+  height: 60px;
+  background: linear-gradient(to bottom, transparent, var(--gold));
+  margin: 0 auto 32px;
+}
+
+.hero-title {
+  font-family: var(--serif);
+  color: white;
+  font-size: clamp(3rem, 7vw, 5rem);
+  font-weight: 900;
+  letter-spacing: 16px;
+  margin-bottom: 24px;
+  text-shadow: 0 4px 40px rgba(0,0,0,0.4);
+}
+
+/* Cycling subtitle container */
+.hero-subtitle-wrap {
+  height: 50px;
+  overflow: hidden;
+  position: relative;
+  margin-bottom: 48px;
+}
+.hero-subtitle {
+  position: absolute;
+  width: 100%;
+  color: var(--gold-light);
+  font-family: var(--serif);
+  font-size: clamp(1rem, 2.5vw, 1.5rem);
+  font-weight: 400;
+  letter-spacing: 8px;
+  opacity: 0;
+  transform: translateY(40px);
+}
+
+.hero-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  background: transparent;
+  color: white;
+  font-family: var(--serif);
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 4px;
+  padding: 18px 44px;
+  border: 1px solid rgba(201,169,78,0.5);
+  cursor: pointer;
+  transition: all 0.4s var(--ease);
+  position: relative;
+  overflow: hidden;
+}
+.hero-cta::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: var(--gold);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.4s var(--ease);
+  z-index: -1;
+}
+.hero-cta:hover {
+  color: var(--navy-dark);
+  border-color: var(--gold);
+}
+.hero-cta:hover::before { transform: scaleX(1); }
+
+.hero-scroll-hint {
+  position: absolute;
+  bottom: 60px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 3;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+.hero-scroll-hint span {
+  font-size: 10px;
+  letter-spacing: 4px;
+  color: rgba(255,255,255,0.3);
+  font-weight: 600;
+}
+.scroll-line {
+  width: 1px;
+  height: 40px;
+  background: linear-gradient(to bottom, rgba(201,169,78,0.6), transparent);
+  animation: scrollLine 2s ease-in-out infinite;
+}
+@keyframes scrollLine {
+  0% { transform: scaleY(0); transform-origin: top; opacity: 1; }
+  50% { transform: scaleY(1); transform-origin: top; opacity: 1; }
+  50.1% { transform: scaleY(1); transform-origin: bottom; }
+  100% { transform: scaleY(0); transform-origin: bottom; opacity: 1; }
+}
+
+/* =========================================================
+   FEATURES — scroll-triggered slide in
+   ========================================================= */
+.features { padding: 80px 0 40px; }
+
+.feature-block {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  align-items: center;
+  margin-bottom: 120px;
+}
+.feature-block.reverse { direction: rtl; }
+.feature-block.reverse > * { direction: ltr; }
+
+.feature-img {
+  position: relative;
+  border-radius: 4px;
+  overflow: hidden;
+  aspect-ratio: 4/3;
+}
+.feature-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.8s var(--ease);
+}
+.feature-img:hover img { transform: scale(1.04); }
+.feature-img::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border: 1px solid rgba(201,169,78,0.12);
+  pointer-events: none;
+}
+
+.feature-text { padding: 20px 0; }
+.feature-label {
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 5px;
+  color: var(--gold);
+  margin-bottom: 16px;
+  text-transform: uppercase;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.feature-label::before {
+  content: '';
+  width: 30px;
+  height: 1px;
+  background: var(--gold);
+}
+.feature-title {
+  font-size: 2.2rem;
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+.feature-underline {
+  width: 0;
+  height: 2px;
+  background: var(--gold);
+  margin-bottom: 24px;
+  opacity: 0.5;
+}
+.feature-desc {
+  font-size: 16px;
+  line-height: 2.1;
+  color: var(--text);
+  letter-spacing: 1px;
+}
+
+@media (max-width: 768px) {
+  .feature-block { grid-template-columns: 1fr; gap: 30px; }
+  .feature-block.reverse { direction: ltr; }
+}
+
+/* =========================================================
+   CTA BAR — parallax background
+   ========================================================= */
+.cta-bar {
+  position: relative;
+  padding: 100px 0;
+  text-align: center;
+  overflow: hidden;
+}
+.cta-bar-bg {
+  position: absolute;
+  inset: -30%;
+  background: url('https://images.unsplash.com/photo-1507692049790-de58290a4334?w=1600&q=80') center/cover no-repeat;
+  will-change: transform;
+}
+.cta-bar-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(17,28,51,0.88);
+}
+.cta-bar-content {
+  position: relative;
+  z-index: 1;
+}
+.cta-bar h3 {
+  color: white;
+  font-size: 1.8rem;
+  font-weight: 700;
+  margin-bottom: 12px;
+  letter-spacing: 6px;
+}
+.cta-bar p {
+  color: var(--gold-light);
+  font-size: 15px;
+  margin-bottom: 36px;
+  letter-spacing: 3px;
+}
+.cta-bar .cta-btn {
+  display: inline-block;
+  background: var(--gold);
+  color: var(--navy-dark);
+  font-family: var(--serif);
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 3px;
+  padding: 16px 44px;
+  transition: all 0.4s;
+}
+.cta-bar .cta-btn:hover {
+  background: white;
+  transform: translateY(-3px);
+  box-shadow: 0 12px 40px rgba(201,169,78,0.3);
+}
+
+/* =========================================================
+   BELIEF — Horizontal scroll pinned section
+   ========================================================= */
+.belief-section {
+  overflow: hidden;
+}
+.belief-header {
+  text-align: center;
+  padding: 100px 0 60px;
+  background: var(--bg-white);
+}
+.belief-header h2 {
+  font-size: 2.4rem;
+  font-weight: 900;
+  letter-spacing: 8px;
+  margin-bottom: 16px;
+}
+.belief-header p {
+  color: var(--text-muted);
+  font-size: 16px;
+  max-width: 500px;
+  margin: 20px auto 0;
+}
+
+.sola-track-wrapper {
+  background: var(--bg-white);
+  position: relative;
+}
+.sola-track {
+  display: flex;
+  width: fit-content;
+  will-change: transform;
+}
+.sola-card {
+  width: 100vw;
+  max-width: 500px;
+  flex-shrink: 0;
+  padding: 60px 48px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  position: relative;
+}
+.sola-card::after {
+  content: '';
+  position: absolute;
+  right: 0;
+  top: 20%;
+  height: 60%;
+  width: 1px;
+  background: var(--border);
+}
+.sola-card:last-child::after { display: none; }
+
+.sola-number {
+  font-family: var(--serif);
+  font-size: 4rem;
+  font-weight: 900;
+  color: var(--gold);
+  opacity: 0.2;
+  line-height: 1;
+  margin-bottom: 16px;
+}
+.sola-latin {
+  font-family: var(--serif);
+  font-size: 11px;
+  letter-spacing: 5px;
+  color: var(--gold);
+  font-weight: 600;
+  margin-bottom: 12px;
+  text-transform: uppercase;
+}
+.sola-title {
+  font-size: 1.6rem;
+  font-weight: 700;
+  margin-bottom: 16px;
+}
+.sola-desc {
+  font-size: 15px;
+  line-height: 2;
+  color: var(--text);
+}
+
+/* Progress dots */
+.sola-progress {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  padding: 40px 0 80px;
+  background: var(--bg-white);
+}
+.sola-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--border);
+  transition: all 0.3s;
+}
+.sola-dot.active {
+  background: var(--gold);
+  width: 24px;
+  border-radius: 4px;
+}
+
+/* =========================================================
+   BLOG — Magazine
+   ========================================================= */
+.blog-section { padding: 80px 0; background: var(--bg); }
+.section-header { text-align: center; margin-bottom: 60px; }
+.section-header h2 { font-size: 2rem; font-weight: 700; margin-bottom: 12px; }
+
+.blog-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: auto auto;
+  gap: 24px;
+}
+.blog-featured {
+  grid-row: 1 / 3;
+  position: relative;
+  border-radius: 8px;
+  overflow: hidden;
+  min-height: 520px;
+  cursor: pointer;
+}
+.blog-featured img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.8s var(--ease); }
+.blog-featured:hover img { transform: scale(1.04); }
+.blog-featured-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(17,28,51,0.92) 0%, rgba(17,28,51,0.3) 45%, transparent 100%);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 44px;
+}
+.blog-tag {
+  display: inline-block;
+  background: var(--gold);
+  color: var(--navy-dark);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  padding: 4px 14px;
+  margin-bottom: 16px;
+  width: fit-content;
+  text-transform: uppercase;
+}
+.blog-featured h3 { color: white; font-size: 1.5rem; font-weight: 700; margin-bottom: 12px; line-height: 1.5; }
+.blog-featured .blog-excerpt { color: rgba(255,255,255,0.65); font-size: 14px; line-height: 1.7; margin-bottom: 12px; }
+.blog-featured .blog-date { color: var(--gold-light); font-size: 13px; }
+
+.blog-card {
+  background: var(--bg-white);
+  border-radius: 8px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  cursor: pointer;
+  transition: transform 0.4s var(--ease), box-shadow 0.4s;
+}
+.blog-card:hover { transform: translateY(-6px); box-shadow: 0 16px 48px rgba(0,0,0,0.08); }
+.blog-card-img { height: 200px; overflow: hidden; }
+.blog-card-img img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.6s var(--ease); }
+.blog-card:hover .blog-card-img img { transform: scale(1.06); }
+.blog-card-body { padding: 24px; flex: 1; display: flex; flex-direction: column; }
+.blog-card .blog-tag-text { font-size: 11px; font-weight: 700; letter-spacing: 2px; color: var(--gold); margin-bottom: 10px; }
+.blog-card h4 { font-size: 1.05rem; font-weight: 700; margin-bottom: 10px; line-height: 1.5; }
+.blog-card .blog-excerpt { font-size: 14px; color: var(--text-muted); line-height: 1.6; flex: 1; }
+.blog-card .blog-date { font-size: 13px; color: var(--text-light); margin-top: 14px; }
+
+@media (max-width: 768px) {
+  .blog-grid { grid-template-columns: 1fr; }
+  .blog-featured { min-height: 400px; grid-row: auto; }
+}
+
+/* =========================================================
+   FOOTER
+   ========================================================= */
+.site-footer {
+  background: var(--footer-bg);
+  color: rgba(255,255,255,0.7);
+  padding: 64px 0 0;
+}
+.footer-grid {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr 1fr;
+  gap: 48px;
+  padding-bottom: 48px;
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+}
+.footer-brand-logo { font-family: var(--serif); font-size: 22px; font-weight: 900; color: white; letter-spacing: 3px; margin-bottom: 16px; }
+.footer-brand-logo span { color: var(--gold); }
+.footer-desc { font-size: 14px; line-height: 1.8; margin-bottom: 24px; color: rgba(255,255,255,0.45); }
+.footer-social { display: flex; gap: 10px; }
+.footer-social a {
+  width: 38px; height: 38px; border-radius: 50%; border: 1px solid rgba(255,255,255,0.12);
+  display: flex; align-items: center; justify-content: center; color: rgba(255,255,255,0.5);
+  font-size: 13px; font-weight: 700; transition: all 0.3s;
+}
+.footer-social a:hover { background: var(--gold); border-color: var(--gold); color: var(--footer-bg); }
+.footer-heading { font-family: var(--serif); font-size: 12px; font-weight: 700; letter-spacing: 3px; color: var(--gold); margin-bottom: 20px; text-transform: uppercase; }
+.footer-list { list-style: none; }
+.footer-list li { display: flex; align-items: start; gap: 10px; margin-bottom: 14px; font-size: 14px; line-height: 1.6; }
+.footer-list .dot { width: 4px; height: 4px; border-radius: 50%; background: var(--gold); flex-shrink: 0; margin-top: 9px; opacity: 0.5; }
+.footer-highlight-box {
+  background: rgba(201,169,78,0.06); border-left: 3px solid var(--gold);
+  padding: 14px 18px; border-radius: 0 6px 6px 0; margin-bottom: 16px;
+  color: white; font-weight: 600; font-size: 15px;
+}
+.footer-bottom { padding: 20px 0; text-align: center; font-size: 12px; color: rgba(255,255,255,0.25); letter-spacing: 1px; }
+
+@media (max-width: 768px) {
+  .footer-grid { grid-template-columns: 1fr; gap: 32px; }
+  .sola-card { max-width: 85vw; padding: 40px 28px; }
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+</style>
+</head>
+<body>
+
+<!-- Scroll progress -->
+<div class="scroll-progress" id="scrollProgress"></div>
+
+<!-- NAVBAR -->
+<nav class="site-nav" id="siteNav">
+  <div class="nav-inner">
+    <div class="nav-logo">磐石<span>之心</span></div>
+    <ul class="nav-links">
+      <li><a href="#features">關於我們</a></li>
+      <li><a href="#belief">信仰宣言</a></li>
+      <li><a href="#blog">文章專區</a></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="hero">
+  <div class="hero-bg" id="heroBg"></div>
+  <div class="hero-bg-overlay"></div>
+  <div class="hero-grid" id="heroGrid"></div>
+  <div class="hero-particles" id="heroParticles"></div>
+
+  <div class="hero-content" id="heroContent">
+    <div class="hero-line-deco"></div>
+    <h1 class="hero-title">磐石之心</h1>
+    <div class="hero-subtitle-wrap">
+      <div class="hero-subtitle" data-line="0">歡迎回家</div>
+      <div class="hero-subtitle" data-line="1">以福音為中心的教會</div>
+      <div class="hero-subtitle" data-line="2">兼容平衡的教會</div>
+      <div class="hero-subtitle" data-line="3">認識十架的教會</div>
+    </div>
+    <button class="hero-cta">認識我們 &rarr;</button>
+  </div>
+
+  <div class="hero-scroll-hint">
+    <span>SCROLL</span>
+    <div class="scroll-line"></div>
+  </div>
+</section>
+
+<!-- FEATURES -->
+<section class="features" id="features">
+  <div class="container">
+    <div class="feature-block reverse" data-feature>
+      <div class="feature-img">
+        <img src="https://images.unsplash.com/photo-1504052434569-70ad5836ab65?w=800&q=80" alt="Gospel" />
+      </div>
+      <div class="feature-text">
+        <div class="feature-label">GOSPEL</div>
+        <h2 class="feature-title">以福音為中心的教會</h2>
+        <div class="feature-underline"></div>
+        <p class="feature-desc">福音就是基督為自己百姓做成的救恩，教會以此為中心不斷發現福音的恩典運用在生命上，離開以行為換取祝福的宗教模式。</p>
+      </div>
+    </div>
+
+    <div class="feature-block" data-feature>
+      <div class="feature-img">
+        <img src="https://images.unsplash.com/photo-1497015289639-54688650d173?w=800&q=80" alt="Balance" />
+      </div>
+      <div class="feature-text">
+        <div class="feature-label">BALANCE</div>
+        <h2 class="feature-title">兼容平衡的教會</h2>
+        <div class="feature-underline"></div>
+        <p class="feature-desc">崇拜、團契與使命是健康教會均衡發展的三要素，避免教會成為神學院或內聚的團體。</p>
+      </div>
+    </div>
+
+    <div class="feature-block reverse" data-feature>
+      <div class="feature-img">
+        <img src="https://images.unsplash.com/photo-1507692049790-de58290a4334?w=800&q=80" alt="Bible" />
+      </div>
+      <div class="feature-text">
+        <div class="feature-label">BIBLE</div>
+        <h2 class="feature-title">學習聖經的教會</h2>
+        <div class="feature-underline"></div>
+        <p class="feature-desc">聖經是上帝所啟示的生命之道，因此教會有責任教導信徒聖經真理，指出聖經前後一致的焦點是基督，以及祂如何因為愛所成就的事。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA BAR -->
+<section class="cta-bar">
+  <div class="cta-bar-bg" id="ctaBg"></div>
+  <div class="cta-bar-overlay"></div>
+  <div class="cta-bar-content">
+    <h3>歡迎來到磐石之心</h3>
+    <p>每週日早上 10:30 &#183; 台中市西區臺灣大道二段285號22樓</p>
+    <a class="cta-btn" href="#">聚會資訊 &rarr;</a>
+  </div>
+</section>
+
+<!-- BELIEF — Horizontal Scroll -->
+<section class="belief-section" id="belief">
+  <div class="belief-header">
+    <h2>信 仰 宣 言</h2>
+    <div class="gold-line-center" style="margin-top:16px"></div>
+    <p>我們的信仰沿襲基督教神學家們的信仰宣言，也是教會信仰生活的基礎指引。</p>
+  </div>
+  <div class="sola-track-wrapper" id="solaWrapper">
+    <div class="sola-track" id="solaTrack">
+      <div class="sola-card"><div class="sola-number">01</div><div class="sola-latin">Sola Scriptura</div><h3 class="sola-title">唯獨聖經</h3><p class="sola-desc">聖經是上帝全然無誤的默示，是教會唯一的權威並受其教導。</p></div>
+      <div class="sola-card"><div class="sola-number">02</div><div class="sola-latin">Sola Fide</div><h3 class="sola-title">唯獨信心</h3><p class="sola-desc">救恩唯獨是藉著上帝所賞賜的信心，不是憑著人的能力或行為。</p></div>
+      <div class="sola-card"><div class="sola-number">03</div><div class="sola-latin">Sola Gratia</div><h3 class="sola-title">唯獨恩典</h3><p class="sola-desc">神所賜給教會的救恩是白白藉著基督賜給不配蒙恩的罪人，獲得永恆的生命。</p></div>
+      <div class="sola-card"><div class="sola-number">04</div><div class="sola-latin">Solus Christus</div><h3 class="sola-title">唯獨基督</h3><p class="sola-desc">上帝所給人赦罪得永生的救恩唯獨透過基督作為上帝與人之間的中保，沒有其他人、事、物可代替。</p></div>
+      <div class="sola-card"><div class="sola-number">05</div><div class="sola-latin">Soli Deo Gloria</div><h3 class="sola-title">唯獨上帝的榮耀</h3><p class="sola-desc">上帝給人的救恩是藉著自己的意志和行為力完成，因此也只有祂自己配得榮耀與頌讚。</p></div>
+    </div>
+  </div>
+  <div class="sola-progress" id="solaProgress">
+    <div class="sola-dot active"></div>
+    <div class="sola-dot"></div>
+    <div class="sola-dot"></div>
+    <div class="sola-dot"></div>
+    <div class="sola-dot"></div>
+  </div>
+</section>
+
+<!-- BLOG -->
+<section class="blog-section" id="blog">
+  <div class="container">
+    <div class="section-header">
+      <h2>文章專區</h2>
+      <div class="gold-line-center" style="margin-top:12px"></div>
+    </div>
+    <div class="blog-grid">
+      <div class="blog-featured">
+        <img src="https://images.unsplash.com/photo-1716808154878-e812fdb842e8?w=800&q=80" alt="" />
+        <div class="blog-featured-overlay">
+          <div class="blog-tag">神學</div>
+          <h3>不要加油添醋(或稀釋)聖經的內容</h3>
+          <p class="blog-excerpt">我們知道罪仍然在我們裡面，因為我們往往只是藉著翻閱聖經來支持我們的論點……</p>
+          <span class="blog-date">2025 年 8 月 10 日</span>
+        </div>
+      </div>
+      <div class="blog-card">
+        <div class="blog-card-img"><img src="https://images.unsplash.com/photo-1497015289639-54688650d173?w=600&q=80" alt="" /></div>
+        <div class="blog-card-body">
+          <span class="blog-tag-text">神學</span>
+          <h4>讀經時請謹記這10件事</h4>
+          <p class="blog-excerpt">聖經是神自己的話。聖經上所寫的就是神所說的……</p>
+          <span class="blog-date">2025 年 8 月 10 日</span>
+        </div>
+      </div>
+      <div class="blog-card">
+        <div class="blog-card-img"><img src="https://images.unsplash.com/photo-1504052434569-70ad5836ab65?w=600&q=80" alt="" /></div>
+        <div class="blog-card-body">
+          <span class="blog-tag-text">神學</span>
+          <h4>理解歷史需具備同理心</h4>
+          <p class="blog-excerpt">所有的歷史分析都必須考慮事件、人物和含義……</p>
+          <span class="blog-date">2025 年 8 月 17 日</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <div class="footer-brand-logo">磐石<span>之心</span></div>
+        <p class="footer-desc">以福音為中心、兼容平衡、學習聖經的教會。在基督的恩典中一同成長。</p>
+        <div class="footer-social"><a href="#">Fb</a><a href="#">YT</a><a href="#">IG</a></div>
+      </div>
+      <div>
+        <h6 class="footer-heading">聚會資訊</h6>
+        <div class="footer-highlight-box">每週日早上 10:30</div>
+        <ul class="footer-list"><li><span class="dot"></span>403台中市西區臺灣大道二段285號22樓</li></ul>
+      </div>
+      <div>
+        <h6 class="footer-heading">聯絡我們</h6>
+        <ul class="footer-list">
+          <li><span class="dot"></span>daansolidrock@gmail.com</li>
+          <li><span class="dot"></span>0954-030-032</li>
+          <li><span class="dot"></span>統一編號：92263802</li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">Copyright &copy;2024 &ndash; 磐石之心 All Rights Reserved.</div>
+  </div>
+</footer>
+
+<script>
+gsap.registerPlugin(ScrollTrigger);
+
+/* ---- Scroll Progress Bar ---- */
+gsap.to('#scrollProgress', {
+  width: '100%',
+  ease: 'none',
+  scrollTrigger: { trigger: 'body', start: 'top top', end: 'bottom bottom', scrub: 0.3 }
+});
+
+/* ---- Navbar scroll state ---- */
+ScrollTrigger.create({
+  start: 80,
+  onUpdate: (self) => {
+    document.getElementById('siteNav').classList.toggle('scrolled', self.scroll() > 80);
+  }
+});
+
+/* ---- Hero: Cycling subtitle text ---- */
+const lines = document.querySelectorAll('.hero-subtitle');
+const cycleTl = gsap.timeline({ repeat: -1, delay: 0.5 });
+lines.forEach((line, i) => {
+  cycleTl
+    .fromTo(line, { y: 40, opacity: 0 }, { y: 0, opacity: 1, duration: 1, ease: 'power2.out' })
+    .to(line, { y: -30, opacity: 0, duration: 0.8, ease: 'power2.in', delay: 1.8 });
+});
+
+/* ---- Hero: Parallax on scroll ---- */
+gsap.to('#heroBg', {
+  y: '30%',
+  ease: 'none',
+  scrollTrigger: { trigger: '.hero', start: 'top top', end: 'bottom top', scrub: true }
+});
+gsap.to('#heroGrid', {
+  y: '20%',
+  ease: 'none',
+  scrollTrigger: { trigger: '.hero', start: 'top top', end: 'bottom top', scrub: true }
+});
+gsap.to('#heroContent', {
+  y: '-20%',
+  opacity: 0,
+  ease: 'none',
+  scrollTrigger: { trigger: '.hero', start: '60% top', end: 'bottom top', scrub: true }
+});
+
+/* ---- Hero: Gold particles ---- */
+const particleContainer = document.getElementById('heroParticles');
+for (let i = 0; i < 20; i++) {
+  const p = document.createElement('div');
+  p.className = 'particle';
+  p.style.left = Math.random() * 100 + '%';
+  p.style.top = Math.random() * 100 + '%';
+  particleContainer.appendChild(p);
+  gsap.to(p, {
+    y: -200 - Math.random() * 300,
+    opacity: 0.15 + Math.random() * 0.35,
+    duration: 4 + Math.random() * 6,
+    repeat: -1,
+    delay: Math.random() * 5,
+    ease: 'none',
+    yoyo: true
+  });
+}
+
+/* ---- Features: ScrollTrigger slide-in ---- */
+document.querySelectorAll('[data-feature]').forEach((block) => {
+  const img = block.querySelector('.feature-img');
+  const label = block.querySelector('.feature-label');
+  const title = block.querySelector('.feature-title');
+  const underline = block.querySelector('.feature-underline');
+  const desc = block.querySelector('.feature-desc');
+  const isReverse = block.classList.contains('reverse');
+
+  const tl = gsap.timeline({
+    scrollTrigger: { trigger: block, start: 'top 75%', end: 'top 25%', toggleActions: 'play none none none' }
+  });
+
+  tl.from(img, { x: isReverse ? 80 : -80, opacity: 0, duration: 0.8, ease: 'power3.out' })
+    .from(label, { x: isReverse ? -30 : 30, opacity: 0, duration: 0.5 }, '-=0.4')
+    .from(title, { y: 20, opacity: 0, duration: 0.5 }, '-=0.3')
+    .to(underline, { width: '60px', duration: 0.6, ease: 'power2.out' }, '-=0.2')
+    .from(desc, { y: 20, opacity: 0, duration: 0.5 }, '-=0.3');
+});
+
+/* ---- CTA Bar: Parallax ---- */
+gsap.to('#ctaBg', {
+  y: '25%',
+  ease: 'none',
+  scrollTrigger: { trigger: '.cta-bar', start: 'top bottom', end: 'bottom top', scrub: true }
+});
+
+/* ---- Belief: Horizontal Scroll ---- */
+const solaTrack = document.getElementById('solaTrack');
+const solaCards = solaTrack.querySelectorAll('.sola-card');
+const totalScroll = solaTrack.scrollWidth - window.innerWidth;
+const dots = document.querySelectorAll('.sola-dot');
+
+const solaST = ScrollTrigger.create({
+  trigger: '#solaWrapper',
+  start: 'top top',
+  end: () => '+=' + totalScroll,
+  pin: true,
+  scrub: 1,
+  onUpdate: (self) => {
+    gsap.set(solaTrack, { x: -self.progress * totalScroll });
+    const activeIdx = Math.min(Math.floor(self.progress * solaCards.length), solaCards.length - 1);
+    dots.forEach((d, i) => d.classList.toggle('active', i === activeIdx));
+  }
+});
+
+/* ---- Blog cards: stagger fade in ---- */
+gsap.from('.blog-grid > *', {
+  y: 40,
+  opacity: 0,
+  duration: 0.7,
+  stagger: 0.15,
+  ease: 'power2.out',
+  scrollTrigger: { trigger: '.blog-grid', start: 'top 80%' }
+});
+
+/* ---- Footer: fade in ---- */
+gsap.from('.footer-grid > *', {
+  y: 30,
+  opacity: 0,
+  duration: 0.6,
+  stagger: 0.1,
+  scrollTrigger: { trigger: '.site-footer', start: 'top 90%' }
+});
+</script>
+
+</body>
+</html>

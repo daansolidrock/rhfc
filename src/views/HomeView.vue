@@ -9,11 +9,11 @@
         effect="fade"
         class="hero-swiper"
       >
-        <swiper-slide class="d-md-none">
-          <img src="@/assets/images/home/網頁圖片.jpg" class="hero-img special" alt="磐石之心教會" />
-        </swiper-slide>
-        <swiper-slide class="d-none d-md-block">
-          <img src="@/assets/images/home/網頁圖片3.jpg" class="hero-img special" alt="磐石之心教會" />
+        <swiper-slide>
+          <picture>
+            <source media="(min-width: 768px)" :srcset="heroDesktop" />
+            <img :src="heroMobile" class="hero-img special" alt="磐石之心教會" />
+          </picture>
         </swiper-slide>
         <swiper-slide>
           <img src="@/assets/images/home/intro02.jpg" class="hero-img" alt="磐石之心教會" />
@@ -96,6 +96,8 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import 'swiper/css'
 import 'swiper/css/effect-fade'
 
+import heroMobile from '@/assets/images/home/網頁圖片.jpg'
+import heroDesktop from '@/assets/images/home/網頁圖片3.jpg'
 import img01 from '@/assets/images/home/01.jpg'
 import img02 from '@/assets/images/home/02.jpg'
 import img03 from '@/assets/images/home/03.jpg'
@@ -105,7 +107,6 @@ gsap.registerPlugin(ScrollTrigger)
 const autoplayOptions = {
   delay: 4000,
   disableOnInteraction: false,
-  loop: true,
   pauseOnMouseEnter: true,
 }
 const swiperModules = [Autoplay, EffectFade]
@@ -154,25 +155,37 @@ onMounted(() => {
         .to(line, { y: -30, opacity: 0, duration: 0.8, ease: 'power2.in', delay: 1.8 })
     })
 
-    // Hero parallax on scroll
-    gsap.to(heroBgRef.value, {
-      y: '25%',
-      ease: 'none',
-      scrollTrigger: { trigger: heroRef.value, start: 'top top', end: 'bottom top', scrub: true },
-    })
-    gsap.to(heroGridRef.value, {
-      y: '18%',
-      ease: 'none',
-      scrollTrigger: { trigger: heroRef.value, start: 'top top', end: 'bottom top', scrub: true },
-    })
-    gsap.to(heroContentRef.value, {
-      y: '-15%',
-      opacity: 0,
-      ease: 'none',
-      scrollTrigger: { trigger: heroRef.value, start: '55% top', end: 'bottom top', scrub: true },
+    // Parallax only on desktop (mobile browsers cause scroll jumps)
+    ScrollTrigger.matchMedia({
+      '(min-width: 769px)': () => {
+        gsap.to(heroBgRef.value, {
+          y: '25%',
+          ease: 'none',
+          scrollTrigger: { trigger: heroRef.value, start: 'top top', end: 'bottom top', scrub: true },
+        })
+        gsap.to(heroGridRef.value, {
+          y: '18%',
+          ease: 'none',
+          scrollTrigger: { trigger: heroRef.value, start: 'top top', end: 'bottom top', scrub: true },
+        })
+        gsap.to(heroContentRef.value, {
+          y: '-15%',
+          opacity: 0,
+          ease: 'none',
+          scrollTrigger: { trigger: heroRef.value, start: '55% top', end: 'bottom top', scrub: true },
+        })
+
+        if (ctaBgRef.value) {
+          gsap.to(ctaBgRef.value, {
+            y: '20%',
+            ease: 'none',
+            scrollTrigger: { trigger: '.cta-bar', start: 'top bottom', end: 'bottom top', scrub: true },
+          })
+        }
+      },
     })
 
-    // Feature blocks scroll-triggered
+    // Feature blocks scroll-triggered (keep on all devices)
     featureRefs.value.forEach((block) => {
       if (!block) return
       const img = block.querySelector('.feature-img')
@@ -191,15 +204,6 @@ onMounted(() => {
         .to(underline, { width: '60px', duration: 0.5, ease: 'power2.out' }, '-=0.2')
         .from(desc, { y: 20, opacity: 0, duration: 0.5 }, '-=0.3')
     })
-
-    // CTA parallax
-    if (ctaBgRef.value) {
-      gsap.to(ctaBgRef.value, {
-        y: '20%',
-        ease: 'none',
-        scrollTrigger: { trigger: '.cta-bar', start: 'top bottom', end: 'bottom top', scrub: true },
-      })
-    }
   })
 })
 
@@ -212,12 +216,16 @@ onUnmounted(() => {
 /* ===== HERO ===== */
 .hero {
   position: relative;
-  height: 100vh;
+  height: 100dvh;
   min-height: 600px;
   overflow: hidden;
   display: flex;
   align-items: center;
   justify-content: center;
+
+  @supports not (height: 100dvh) {
+    height: 100vh;
+  }
 }
 
 .hero-bg {

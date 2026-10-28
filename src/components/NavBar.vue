@@ -25,6 +25,9 @@
 			<li>
 				<router-link to="/service" class="nav-link" :class="{ active: $route.path === '/service' }">聚會資訊</router-link>
 			</li>
+			<li>
+				<router-link to="/donate" class="nav-link" :class="{ active: $route.path === '/donate' }">奉獻</router-link>
+			</li>
 			</ul>
 
 			<button class="menu-toggle d-md-none" @click="openRwdMenu" aria-label="開啟選單">

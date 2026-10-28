@@ -24,6 +24,9 @@
                 <li>
                     <router-link to="/service" class="menu-link">聚會資訊</router-link>
                 </li>
+                <li>
+                    <router-link to="/donate" class="menu-link">奉獻</router-link>
+                </li>
             </ul>
 
             <div class="menu-footer">

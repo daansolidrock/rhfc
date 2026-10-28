@@ -1,6 +1,6 @@
 <template>
   <ImageSection title="文章專區"
-    background-image="url(https://images.unsplash.com/photo-1497015289639-54688650d173?auto=format&fit=crop&q=80&w=1932&ixlib=rb-4.0.3)" />
+    background-image="url(https://images.pexels.com/photos/8383491/pexels-photo-8383491.jpeg?auto=compress&cs=tinysrgb&w=1920)" />
 
   <div class="container blog-wrap py-5">
     <!-- Breadcrumb: detail mode only -->

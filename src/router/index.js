@@ -35,6 +35,12 @@ const router = createRouter({
           meta: { footerShow: true, logoShow: true }
         },
         {
+          path: 'donate',
+          name: 'donate',
+          component: () => import('@/views/DonateView.vue'),
+          meta: { footerShow: true, logoShow: true }
+        },
+        {
           path: 'blog/:slug?',
           name: 'blog',
           component: () => import('@/views/BlogView.vue'),
